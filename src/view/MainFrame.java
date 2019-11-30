@@ -38,14 +38,10 @@ public class MainFrame extends JFrame {
 		tabbedPane.setFont(new Font("Arial", Font.PLAIN, 30));
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		PredmetiTab predmetiTab = new PredmetiTab();
-		tabbedPane.add("Predmeti 2",predmetiTab);
+		ProfesorToolbar profesorToolbar = new ProfesorToolbar(this);
+		add(profesorToolbar, BorderLayout.NORTH);
 	
 		setVisible(true);
-	}
-	
-	public void createTabbedPane() {
-		
 	}
 	
 	
