@@ -10,8 +10,9 @@ public class Predmet {
 	private Profesor profesor;
 	private ArrayList<Student> studenti;
 	
-	public Predmet(String sifra, String naziv, Semestar semestar, GodinaStudija godina, Profesor profesor,
-			ArrayList<Student> studenti) {
+	public Predmet(String sifra, String naziv, Semestar semestar, GodinaStudija godina, Profesor profesor,ArrayList<Student> studenti)
+	{
+			
 		super();
 		this.sifra = sifra;
 		this.naziv = naziv;
@@ -42,8 +43,9 @@ public class Predmet {
 	}
 
 	public ArrayList<Student> getStudenti() {
-		return studenti;
+	return studenti;
 	}
+	
 
 	public void setSifra(String sifra) {
 		this.sifra = sifra;
