@@ -32,6 +32,7 @@ public class MainFrame extends JFrame {
 		MainMenu menu = new MainMenu();
 		setJMenuBar(menu);
 		StatusBar statBar = new StatusBar();
+		statBar.setSize(getSize());
 		getContentPane().add(statBar, BorderLayout.SOUTH);
 		
 		TabbedPane tabbedPane = new TabbedPane(JTabbedPane.TOP);
@@ -40,7 +41,8 @@ public class MainFrame extends JFrame {
 		
 		ProfesorToolbar profesorToolbar = new ProfesorToolbar(this);
 		add(profesorToolbar, BorderLayout.NORTH);
-	
+		this.setTitle("Studentska služba");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
 	

@@ -1,7 +1,6 @@
 package view;
 
 	import java.awt.Font;
-import java.awt.Insets;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
@@ -14,7 +13,7 @@ import javax.swing.KeyStroke;
 		
 		public MainMenu(){
 			
-			
+			setFont(new Font("Arial", Font.PLAIN, 20));
 			JMenu file= new JMenu("File");
 			JMenuItem miNew = new JMenuItem("New",new ImageIcon("images/New16.png"));
 			miNew.setMnemonic(KeyEvent.VK_N);
