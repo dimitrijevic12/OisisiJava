@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controllers.PredmetiController;
 import model.BazaPredmeta;
 import model.GodinaStudija;
 import model.Predmet;
@@ -182,15 +183,11 @@ btnPotvrda.addMouseListener(new MouseListener() {
 		String godina = godinaComboBox.getSelectedItem().toString();
 		GodinaStudija godina1 = GodinaStudija.valueOf(godina);
 		
-		BazaPredmeta.getInstance().dodajPredmet(sifraTextField.getText(), nazivTextField.getText(), semestar1, godina1, new Profesor(), new ArrayList<Student>());
-		
-		for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+/*		for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
 			System.out.println(p.toString());
 		}
-		
-		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti) PredmetiTable.getInstance().getModel();
-		
-		model.fireTableDataChanged();
+*/		
+		PredmetiController.getInstance().dodavanjePredmetaUTabelu(sifraTextField.getText(), nazivTextField.getText(), semestar1, godina1);
 		
 		dispose();
 	}
