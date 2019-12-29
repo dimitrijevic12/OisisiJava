@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -12,9 +14,12 @@ public class ProfesoriTab extends JPanel {
 	private static final long serialVersionUID = 8864686452389354830L;
 
 	public ProfesoriTab() {
+		
+		BorderLayout bLayout = new BorderLayout();
+		this.setLayout(bLayout);
 		JScrollPane scrollProf= new JScrollPane();
 		JTable profesoriTabela = new JTable(new AbstractTableModelProfesor());
-		this.add(scrollProf);
+		this.add(scrollProf, BorderLayout.CENTER);
 		scrollProf.setViewportView(profesoriTabela);
 	}
 	

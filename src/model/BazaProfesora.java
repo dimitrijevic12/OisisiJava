@@ -1,8 +1,11 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import javax.swing.text.SimpleAttributeSet;
 
 public class BazaProfesora {
 	private static BazaProfesora instance = null;
@@ -36,8 +39,7 @@ public class BazaProfesora {
 	private void initProfesore() {
 		this.profesori = new ArrayList<Profesor>();
 		Calendar c = Calendar.getInstance();
-		c.set(1989, 8, 12);
-		profesori.add(new Profesor("Pera", "Peric", new Date(1997, 8, 16), "Micurinova 37", "333-222", "nekiTamo@gmail.com", "Radnicka", 123456, Titula.ASISTENT, Zvanje.DR, new ArrayList<Predmet>()));
+		profesori.add(new Profesor("Pera", "Peric", Calendar.getInstance().getTime(), "Micurinova 37", "333-222", "nekiTamo@gmail.com", "Radnicka", 123456, Titula.ASISTENT, Zvanje.DR, new ArrayList<Predmet>()));
 		profesori.add(new Profesor("Marko", "Markovic", Calendar.getInstance().getTime(), "Micurinova 137", "3331413-222", "nekiTamo2@gmail.com", "Radnicka 12", 4241421, Titula.DOCENT, Zvanje.DR, new ArrayList<Predmet>()));
 		profesori.add(new Profesor("Petar", "Petrovic", Calendar.getInstance().getTime(), "Micurinova 2314237", "33344-22222", "nekiTamo3@gmail.com", "Radnicka 18", 1234321456, Titula.ASISTENT, Zvanje.MR, new ArrayList<Predmet>()));
 	}
@@ -68,7 +70,12 @@ public class BazaProfesora {
 		case 0: return Integer.toString(profesor.getBrLicne());
 		case 1: return profesor.getIme();
 		case 2: return profesor.getPrezime();
-		case 3: return profesor.getDatumRodjenja().toString();
+		case 3: {
+			Date datum = profesor.getDatumRodjenja();
+		    SimpleDateFormat formatDatum = new SimpleDateFormat("dd/MM/yyyy");
+		    String formattedDate = formatDatum.format(datum);
+			return formattedDate;
+		}
 		case 4: return profesor.getAdresaStanovanja();
 		case 5: return profesor.getTelefon();
 		case 6: return profesor.getEmail();

@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 
@@ -16,44 +17,13 @@ public class TabbedPane extends JTabbedPane {
 	public TabbedPane() {
 		
 		JPanel panel = new JPanel();
-		this.addTab("Studenti", null, panel, null);
+		this.addTab("Studenti", panel);
 		
 		ProfesoriTab profesori = new ProfesoriTab();
-		this.addTab("Profesori", null, profesori, null);
+		this.addTab("Profesori", profesori);
 		
 		PredmetiTab predmeti = new PredmetiTab();
-		this.addTab("Predmeti", null, predmeti, null);
+		this.addTab("Predmeti", predmeti);
 	}
-
-	public TabbedPane(int tabPlacement, int tabLayoutPolicy) {
-		JPanel panel = new JPanel();
-		this.addTab("Studenti", null, panel, null);
-		
-		ProfesoriTab profesori = new ProfesoriTab();
-		this.addTab("Profesori", null, profesori, null);
-		
-		PredmetiTab predmeti = new PredmetiTab();
-		this.addTab("Predmeti", null, predmeti, null);
-		this.setTabPlacement(tabPlacement);
-		this.setTabLayoutPolicy(tabLayoutPolicy);
-	}
-
-	public TabbedPane(int tabPlacement) {
-		JPanel panel = new JPanel();
-		this.addTab("Studenti", null, panel, null);
-		
-		ProfesoriTab profesori = new ProfesoriTab();
-		this.addTab("Profesori", null, profesori, null);
-		
-		PredmetiTab predmeti = new PredmetiTab();
-		this.addTab("Predmeti", null, predmeti, null);
-		this.setTabPlacement(tabPlacement);
-	}
-
-	@Override
-	public void addTab(String title, Component component) {
-		super.addTab(title, component);
-	}
-	
 	
 }

@@ -36,7 +36,7 @@ public class MainFrame extends JFrame {
 		StatusBar statBar = new StatusBar();
 		getContentPane().add(statBar, BorderLayout.SOUTH);
 		
-		TabbedPane tabbedPane = new TabbedPane(JTabbedPane.TOP);
+		TabbedPane tabbedPane = new TabbedPane();
 		tabbedPane.setFont(new Font("Arial", Font.PLAIN, 30));
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
