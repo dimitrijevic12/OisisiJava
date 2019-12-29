@@ -7,12 +7,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
+import controllers.PredmetiController;
 import model.BazaPredmeta;
 import model.BazaProfesora;
 import model.Predmet;
@@ -78,32 +80,45 @@ public class PredmetToolbar extends JToolBar {
 			    d.setVisible(true);
 			}
 		});
+
 		
-		addProfesorUPredmetBtn.addActionListener(new ActionListener() {
+		
+		deletePredmetBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				int rowIndex = PredmetiTable.getInstance().getSelectedRow();
+				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
 				
+				PredmetiController.getInstance().brisanjePredmetaIzTabele(predmet);
 			}
 		});
-		
 		addProfesorUPredmetBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				int rowIndex = PredmetiTable.getInstance().getSelectedRow();
+				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
+				
 				JOptionPane dijalog = new JOptionPane();
 				String brLicneKarte = dijalog.showInputDialog(new JFrame(), "Unesite broj licne karte profesora", "Dodavanje profesora", JOptionPane.PLAIN_MESSAGE);
-				for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
-					if(p.getBrLicne() == Integer.parseInt(brLicneKarte)) BazaPredmeta.getInstance().getPredmeti().get(2).setProfesor(p);
-				}
 				
-				for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
-					System.out.println(p);
-				}
+				PredmetiController.getInstance().dodavanjeProfesoraNaPredmet(predmet, brLicneKarte);
 			}
 		});
 		
+		editPredmetBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int rowIndex = PredmetiTable.getInstance().getSelectedRow();
+				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
+				
+				IzmenaPredmetaDijalog dialog = new IzmenaPredmetaDijalog(predmet);
+				dialog.setVisible(true);
+				
+			}
+		});
 	}
+	
 }

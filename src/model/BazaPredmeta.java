@@ -81,22 +81,26 @@ public class BazaPredmeta {
 		this.predmeti.add(new Predmet(sifra, naziv, semestar,  godina,  profesor, studenti));
 	}
 
-	public void izbrisiPredmet(String sifra) {
+	public void izbrisiPredmet(Predmet p) {
 		for (Predmet i : predmeti) {
-			if (i.getSifra() == sifra) {
+			if (i.getSifra() == p.getSifra()) {
 				predmeti.remove(i);
 				break;
 			}
 		}
 	}
 
-	public void izmeniPredmet(String sifra, String naziv, Profesor prof, Semestar semestar, GodinaStudija godina) {
-		for (Predmet p : predmeti) {
-			if (p.getSifra() == sifra) {
-				p.setNaziv(naziv);
-				p.setProfesor(prof);
-				p.setSemestar(semestar);
-				p.setGodina(godina);
+	public void izmeniPredmet(Predmet predmet, String sifra, String naziv, Semestar semestar, GodinaStudija godina) {
+		predmet.setSifra(sifra);
+		predmet.setNaziv(naziv);
+		predmet.setSemestar(semestar);
+		predmet.setGodina(godina);
+	}
+	
+	public void dodajProfesoraNaPredmet(Predmet predmet, String brLicneKarte) {
+		for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
+			if(p.getBrLicne() == Integer.parseInt(brLicneKarte)) {
+				predmet.setProfesor(p);
 			}
 		}
 	}
