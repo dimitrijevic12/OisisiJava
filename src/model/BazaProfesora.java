@@ -24,6 +24,12 @@ public class BazaProfesora {
 		this.kolone.add("Br. lične karte");
 		this.kolone.add("Ime");
 		this.kolone.add("Prezime");
+		this.kolone.add("Datum rođenja");
+		this.kolone.add("Adresa stanovanja");
+		this.kolone.add("Telefon");
+		this.kolone.add("E-mail");
+		this.kolone.add("Adresa kancelarije");
+		this.kolone.add("Titula");
 		this.kolone.add("Zvanje");
 	}
 	
@@ -45,7 +51,7 @@ public class BazaProfesora {
 	}
 	
 	public int getColumnCount() {
-		return 4;
+		return 10;
 	}
 
 	public String getColumnName(int index) {
@@ -62,7 +68,13 @@ public class BazaProfesora {
 		case 0: return Integer.toString(profesor.getBrLicne());
 		case 1: return profesor.getIme();
 		case 2: return profesor.getPrezime();
-		case 3: return profesor.getZvanje().toString();
+		case 3: return profesor.getDatumRodjenja().toString();
+		case 4: return profesor.getAdresaStanovanja();
+		case 5: return profesor.getTelefon();
+		case 6: return profesor.getEmail();
+		case 7: return profesor.getAdresaKancelarije();
+		case 8: return profesor.getTitula().toString();
+		case 9: return profesor.getZvanje().toString();
 		default: return null;
 		}
 	}

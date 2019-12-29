@@ -8,43 +8,45 @@ import javax.swing.JTabbedPane;
 
 public class TabbedPane extends JTabbedPane {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -545990780982120727L;
+
 	public TabbedPane() {
 		
 		JPanel panel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		this.addTab("Studenti", null, panel, null);
 		
-		JPanel panel_1 = new JPanel();
-		this.addTab("Profesori", null, panel_1, null);
+		ProfesoriTab profesori = new ProfesoriTab();
+		this.addTab("Profesori", null, profesori, null);
 		
-		JPanel panel_2 = new JPanel();
-		this.addTab("Predmeti", null, panel_2, null);
+		PredmetiTab predmeti = new PredmetiTab();
+		this.addTab("Predmeti", null, predmeti, null);
 	}
 
 	public TabbedPane(int tabPlacement, int tabLayoutPolicy) {
 		JPanel panel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		this.addTab("Studenti", null, panel, null);
 		
-		JPanel panel_1 = new JPanel();
-		this.addTab("Profesori", null, panel_1, null);
+		ProfesoriTab profesori = new ProfesoriTab();
+		this.addTab("Profesori", null, profesori, null);
 		
-		JPanel panel_2 = new JPanel();
-		this.addTab("Predmeti", null, panel_2, null);
+		PredmetiTab predmeti = new PredmetiTab();
+		this.addTab("Predmeti", null, predmeti, null);
 		this.setTabPlacement(tabPlacement);
 		this.setTabLayoutPolicy(tabLayoutPolicy);
 	}
 
 	public TabbedPane(int tabPlacement) {
 		JPanel panel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		this.addTab("Studenti", null, panel, null);
 		
-		JPanel panel_1 = new JPanel();
-		this.addTab("Profesori", null, panel_1, null);
+		ProfesoriTab profesori = new ProfesoriTab();
+		this.addTab("Profesori", null, profesori, null);
 		
-		JPanel panel_2 = new JPanel();
-		this.addTab("Predmeti", null, panel_2, null);
+		PredmetiTab predmeti = new PredmetiTab();
+		this.addTab("Predmeti", null, predmeti, null);
 		this.setTabPlacement(tabPlacement);
 	}
 
@@ -52,7 +54,6 @@ public class TabbedPane extends JTabbedPane {
 	public void addTab(String title, Component component) {
 		super.addTab(title, component);
 	}
-	
 	
 	
 }

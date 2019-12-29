@@ -7,10 +7,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+
+import model.BazaPredmeta;
+import model.BazaProfesora;
+import model.Predmet;
+import model.Profesor;
 
 public class PredmetToolbar extends JToolBar {
 	/**
@@ -27,15 +33,28 @@ public class PredmetToolbar extends JToolBar {
 		
 		JButton addPredmetBtn = new JButton("");
 		addPredmetBtn.setIcon(new ImageIcon("images/File_add32.png"));
+		addPredmetBtn.setToolTipText("Dodavanje predmeta");
 		panel.add(addPredmetBtn);
 		
 		JButton editPredmetBtn = new JButton("");
 		editPredmetBtn.setIcon(new ImageIcon("images/Edit32.png"));
+		editPredmetBtn.setToolTipText("Izmena predmeta");
 		panel.add(editPredmetBtn);
 		
 		JButton deletePredmetBtn = new JButton("");
 		deletePredmetBtn.setIcon(new ImageIcon("images/Delete32.png"));
+		deletePredmetBtn.setToolTipText("Brisanje predmeta");
 		panel.add(deletePredmetBtn);
+		
+		JButton addProfesorUPredmetBtn = new JButton("");
+		addProfesorUPredmetBtn.setIcon(new ImageIcon("images/Add32.png"));
+		addProfesorUPredmetBtn.setToolTipText("Dodavanje profesora na predmet");
+		panel.add(addProfesorUPredmetBtn);
+		
+		JButton addStudentUPredmetBtn = new JButton("");
+		addStudentUPredmetBtn.setIcon(new ImageIcon("images/Add_user32.png"));
+		addStudentUPredmetBtn.setToolTipText("Dodavanje studenta na predmet");
+		panel.add(addStudentUPredmetBtn);
 		
 		JPanel panel_1 = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) panel_1.getLayout();
@@ -59,5 +78,32 @@ public class PredmetToolbar extends JToolBar {
 			    d.setVisible(true);
 			}
 		});
+		
+		addProfesorUPredmetBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		addProfesorUPredmetBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JOptionPane dijalog = new JOptionPane();
+				String brLicneKarte = dijalog.showInputDialog(new JFrame(), "Unesite broj licne karte profesora", "Dodavanje profesora", JOptionPane.PLAIN_MESSAGE);
+				for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
+					if(p.getBrLicne() == Integer.parseInt(brLicneKarte)) BazaPredmeta.getInstance().getPredmeti().get(2).setProfesor(p);
+				}
+				
+				for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+					System.out.println(p);
+				}
+			}
+		});
+		
 	}
 }

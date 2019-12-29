@@ -15,7 +15,7 @@ import javax.swing.JToolBar;
 public class ProfesorToolbar extends JToolBar {
 	
 	private JTextField textField;
-	public ProfesorToolbar(JFrame frame) {
+	public ProfesorToolbar() {
 		
 		JPanel panel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
@@ -52,9 +52,10 @@ public class ProfesorToolbar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DodavanjeProfesoraDialog d = new DodavanjeProfesoraDialog(frame);
+				DodavanjeProfesoraDialog d = new DodavanjeProfesoraDialog();
 			    d.setVisible(true);
 			}
 		});
+	
 	}
 }

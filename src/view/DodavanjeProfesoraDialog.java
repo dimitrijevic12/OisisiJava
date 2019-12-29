@@ -1,28 +1,35 @@
 package view;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-import javax.swing.JTextField;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import model.BazaProfesora;
+import model.Predmet;
+import model.Profesor;
+import model.Titula;
+import model.Zvanje;
 
 public class DodavanjeProfesoraDialog extends JDialog {
 	private JTextField textField;
@@ -49,7 +56,7 @@ public class DodavanjeProfesoraDialog extends JDialog {
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JPanel panel_11;
-	public DodavanjeProfesoraDialog(JFrame frame) {
+	public DodavanjeProfesoraDialog() {
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension d = new Dimension();
 		d = kit.getScreenSize();
@@ -353,7 +360,7 @@ public class DodavanjeProfesoraDialog extends JDialog {
 		gbc_lblNewLabel_8.gridy = 0;
 		panel_9.add(lblNewLabel_8, gbc_lblNewLabel_8);
 		
-		comboBox = new JComboBox();
+		comboBox = new JComboBox(Titula.values());
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -385,7 +392,7 @@ public class DodavanjeProfesoraDialog extends JDialog {
 		gbc_lblNewLabel_9.gridy = 0;
 		panel_10.add(lblNewLabel_9, gbc_lblNewLabel_9);
 		
-		comboBox_1 = new JComboBox();
+		comboBox_1 = new JComboBox(Zvanje.values());
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
 		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
@@ -479,7 +486,28 @@ public class DodavanjeProfesoraDialog extends JDialog {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
+				Date datumRodjenja = new Date();
+				try {
+					datumRodjenja = new SimpleDateFormat("dd/MM/yyyy").parse(textField_2.getText());
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(new JFrame(), "Unesite u obliku (dd/mm/yyy)", "Pogresno unet datum!", JOptionPane.ERROR_MESSAGE);
+					e1.printStackTrace();
+				} 
+				String titula = comboBox.getSelectedItem().toString();
+				Titula titula1 = Titula.valueOf(titula);
+				
+				String zvanje = comboBox_1.getSelectedItem().toString();
+				Zvanje zvanje1 = Zvanje.valueOf(zvanje);
+				
+				BazaProfesora.getInstance().dodajProfesora(textField.getText(), textField_1.getText(), datumRodjenja, textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText(), Integer.parseInt(textField_7.getText()), titula1, zvanje1, new ArrayList<Predmet>());
+				
+				for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
+					System.out.println(p.toString());
+				}
+				
+				
+				dispose();
 				
 			}
 		});
@@ -488,7 +516,7 @@ public class DodavanjeProfesoraDialog extends JDialog {
 		this.setTitle("Dodavanje profesora");
 		this.setModal(true);
 		this.setResizable(false);
-		this.setLocationRelativeTo(frame);
+		this.setLocationRelativeTo(null);
 		getContentPane().setBackground(Color.WHITE);
 //		this.setUndecorated(true);
 	}
