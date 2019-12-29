@@ -101,6 +101,7 @@ public class DodavanjePredmetaDialog extends JDialog {
 		JButton btnPotvrda = new JButton("Potvrda");
 		btnPotvrda.setForeground(Color.BLACK);
 		btnPotvrda.setBackground(Color.WHITE);
+		btnPotvrda.setEnabled(false);
 		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.add(btnOdustanak);
@@ -161,11 +162,13 @@ btnPotvrda.addMouseListener(new MouseListener() {
 	@Override
 	public void mouseExited(MouseEvent e) {
 		btnPotvrda.setBackground(Color.WHITE);
-		
 	}
 	
 	@Override
 	public void mouseEntered(MouseEvent e) {
+		if((!sifraTextField.getText().equals("")) && !nazivTextField.getText().equals("")) {
+			btnPotvrda.setEnabled(true);
+		}
 		btnPotvrda.setBackground(Color.LIGHT_GRAY);
 		
 	}
@@ -185,7 +188,12 @@ btnPotvrda.addMouseListener(new MouseListener() {
 			System.out.println(p.toString());
 		}
 		
-		}
+		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti) PredmetiTable.getInstance().getModel();
+		
+		model.fireTableDataChanged();
+		
+		dispose();
+	}
 	});
 		
 		this.setTitle("Dodavanje predmeta");

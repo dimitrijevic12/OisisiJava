@@ -16,7 +16,7 @@ public class PredmetiTab extends JPanel {
 		BorderLayout bLayout = new BorderLayout();
 		this.setLayout(bLayout);
 		JScrollPane scrollPred= new JScrollPane();
-		PredmetiTable predmetiTabela = new PredmetiTable();
+		PredmetiTable predmetiTabela = PredmetiTable.getInstance();
 		this.add(scrollPred, BorderLayout.CENTER);
 		scrollPred.setViewportView(predmetiTabela);
 		
