@@ -58,4 +58,12 @@ public class PredmetiController {
 		
 		model.fireTableDataChanged();
 	}
+	
+	public void brisanjeProfesoraSaPredmeta(Predmet predmet) {
+		BazaPredmeta.getInstance().brisanjeProfesoraSaPredmeta(predmet);
+		
+		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti) PredmetiTable.getInstance().getModel();
+		
+		model.fireTableDataChanged();
+	}
 }

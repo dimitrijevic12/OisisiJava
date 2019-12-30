@@ -122,7 +122,6 @@ public class Profesor {
 	}
 	
 	
-	
 /*	public Object toCell(int col) {
 		switch(col) {
 		case 0: return ime;

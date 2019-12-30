@@ -21,7 +21,7 @@ public class BazaPredmeta {
 		initPredmete();
 		
 		this.kolone = new ArrayList<String>();
-		kolone.add("Å ifra");
+		kolone.add("Šifra");
 		kolone.add("Naziv");
 		kolone.add("Profesor");
 		kolone.add("Semestar");
@@ -103,6 +103,11 @@ public class BazaPredmeta {
 				predmet.setProfesor(p);
 			}
 		}
+	}
+	
+	public void brisanjeProfesoraSaPredmeta(Predmet predmet) {
+		predmet.getProfesor().getPredmeti().remove(predmet);
+		predmet.setProfesor(null);
 	}
 
 }

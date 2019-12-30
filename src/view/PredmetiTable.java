@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.JTable;
+import javax.swing.event.RowSorterEvent;
+import javax.swing.event.RowSorterListener;
 import javax.swing.table.TableCellRenderer;
 
 import model.BazaPredmeta;
@@ -25,5 +27,21 @@ public class PredmetiTable extends JTable {
 	
 	private PredmetiTable() {
 		this.setModel(new AbstractTableModelPredmeti());
+		new ButtonColumnPredmeti(this, 5);
+		this.setAutoCreateRowSorter(true);
+		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti) this.getModel();
+		
+		this.getRowSorter().addRowSorterListener(new RowSorterListener() {
+			
+			@Override
+			public void sorterChanged(RowSorterEvent e) {
+		        for (int i = 0; i < model.getRowCount(); i++) {
+		        	for (int j = 0; j < model.getColumnCount(); j++) {
+			        	model.setValueAt(model.getValueAt(i, j), i, j);
+			        }
+		        }
+				
+			}
+		});
 	}
 }

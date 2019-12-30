@@ -44,7 +44,7 @@ public class PredmetToolbar extends JToolBar {
 		panel.add(editPredmetBtn);
 		
 		JButton deletePredmetBtn = new JButton("");
-		deletePredmetBtn.setIcon(new ImageIcon("images/Delete32.png"));
+		deletePredmetBtn.setIcon(new ImageIcon("images/File_delete32.png"));
 		deletePredmetBtn.setToolTipText("Brisanje predmeta");
 		panel.add(deletePredmetBtn);
 		
@@ -52,6 +52,11 @@ public class PredmetToolbar extends JToolBar {
 		addProfesorUPredmetBtn.setIcon(new ImageIcon("images/Add32.png"));
 		addProfesorUPredmetBtn.setToolTipText("Dodavanje profesora na predmet");
 		panel.add(addProfesorUPredmetBtn);
+		
+		JButton deleteProfesoraSaPredmetaBtn = new JButton("");
+		deleteProfesoraSaPredmetaBtn.setIcon(new ImageIcon("images/Delete32.png"));
+		deleteProfesoraSaPredmetaBtn.setToolTipText("Brisanje profesora sa predmeta");
+		panel.add(deleteProfesoraSaPredmetaBtn);
 		
 		JButton addStudentUPredmetBtn = new JButton("");
 		addStudentUPredmetBtn.setIcon(new ImageIcon("images/Add_user32.png"));
@@ -117,6 +122,17 @@ public class PredmetToolbar extends JToolBar {
 				IzmenaPredmetaDijalog dialog = new IzmenaPredmetaDijalog(predmet);
 				dialog.setVisible(true);
 				
+			}
+		});
+		
+		deleteProfesoraSaPredmetaBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int rowIndex = PredmetiTable.getInstance().getSelectedRow();
+				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
+				
+				PredmetiController.getInstance().brisanjeProfesoraSaPredmeta(predmet);
 			}
 		});
 	}
