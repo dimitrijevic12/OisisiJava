@@ -3,6 +3,7 @@ package controllers;
 import java.util.ArrayList;
 
 import model.BazaPredmeta;
+import model.BazaProfesora;
 import model.GodinaStudija;
 import model.Predmet;
 import model.Profesor;
@@ -45,6 +46,7 @@ public class PredmetiController {
 	
 	public void dodavanjeProfesoraNaPredmet(Predmet predmet, String brLicneKarte) {
 		BazaPredmeta.getInstance().dodajProfesoraNaPredmet(predmet, brLicneKarte);
+		System.out.println(BazaProfesora.getInstance());
 		
 		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti) PredmetiTable.getInstance().getModel();
 		
@@ -62,6 +64,12 @@ public class PredmetiController {
 	public void brisanjeProfesoraSaPredmeta(Predmet predmet) {
 		BazaPredmeta.getInstance().brisanjeProfesoraSaPredmeta(predmet);
 		
+		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti) PredmetiTable.getInstance().getModel();
+		
+		model.fireTableDataChanged();
+	}
+	
+	public void promenaPosleDeserijalizacije() {
 		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti) PredmetiTable.getInstance().getModel();
 		
 		model.fireTableDataChanged();

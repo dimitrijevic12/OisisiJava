@@ -1,13 +1,16 @@
 package model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.swing.text.SimpleAttributeSet;
-
-public class BazaProfesora {
+public class BazaProfesora implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7997406027033649884L;
 	private static BazaProfesora instance = null;
 	
 	public static BazaProfesora getInstance() {
@@ -38,7 +41,6 @@ public class BazaProfesora {
 	
 	private void initProfesore() {
 		this.profesori = new ArrayList<Profesor>();
-		Calendar c = Calendar.getInstance();
 		profesori.add(new Profesor("Pera", "Peric", Calendar.getInstance().getTime(), "Micurinova 37", "333-222", "nekiTamo@gmail.com", "Radnicka", 123456, Titula.ASISTENT, Zvanje.DR, new ArrayList<Predmet>()));
 		profesori.add(new Profesor("Marko", "Markovic", Calendar.getInstance().getTime(), "Micurinova 137", "3331413-222", "nekiTamo2@gmail.com", "Radnicka 12", 4241421, Titula.DOCENT, Zvanje.DR, new ArrayList<Predmet>()));
 		profesori.add(new Profesor("Petar", "Petrovic", Calendar.getInstance().getTime(), "Micurinova 2314237", "33344-22222", "nekiTamo3@gmail.com", "Radnicka 18", 1234321456, Titula.ASISTENT, Zvanje.MR, new ArrayList<Predmet>()));
@@ -119,5 +121,12 @@ public class BazaProfesora {
 			}
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "BazaProfesora [kolone=" + kolone + ", profesori=" + profesori + "]";
+	}
+	
+	
 	
 }

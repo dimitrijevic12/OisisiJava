@@ -3,8 +3,6 @@ package view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.AbstractCellEditor;
 import javax.swing.JButton;
@@ -16,6 +14,10 @@ import javax.swing.table.TableCellRenderer;
 public class ButtonColumnPredmeti extends AbstractCellEditor
 		implements TableCellEditor, TableCellRenderer {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8604710114516511150L;
 	private JButton renderButton;
 	private JButton editorButton;
 	private JTable table; 

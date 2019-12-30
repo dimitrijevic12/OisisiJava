@@ -17,13 +17,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controllers.PredmetiController;
-import model.BazaPredmeta;
 import model.GodinaStudija;
 import model.Predmet;
 import model.Semestar;
 
 public class IzmenaPredmetaDijalog extends JDialog{
 		
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = -119774672902729567L;
+
 		public IzmenaPredmetaDijalog(Predmet p) {
 			Toolkit kit = Toolkit.getDefaultToolkit();
 			Dimension d = new Dimension();

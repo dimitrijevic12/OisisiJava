@@ -7,6 +7,10 @@ import java.awt.Component;
 import javax.swing.JPanel;
 
 public class PredmetiTablePanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8842347900706992023L;
 	private JPanel leftPanel = new JPanel();
 	private JPanel rightPanel = new JPanel();
 	public PredmetiTablePanel() {

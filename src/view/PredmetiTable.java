@@ -1,14 +1,8 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Component;
-
 import javax.swing.JTable;
 import javax.swing.event.RowSorterEvent;
 import javax.swing.event.RowSorterListener;
-import javax.swing.table.TableCellRenderer;
-
-import model.BazaPredmeta;
 
 public class PredmetiTable extends JTable {
 	/**

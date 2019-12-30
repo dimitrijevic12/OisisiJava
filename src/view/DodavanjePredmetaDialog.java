@@ -8,26 +8,25 @@ import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controllers.PredmetiController;
-import model.BazaPredmeta;
 import model.GodinaStudija;
-import model.Predmet;
-import model.Profesor;
 import model.Semestar;
-import model.Student;
 
 public class DodavanjePredmetaDialog extends JDialog {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6059562830346244789L;
+
 	public DodavanjePredmetaDialog() {
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension d = new Dimension();

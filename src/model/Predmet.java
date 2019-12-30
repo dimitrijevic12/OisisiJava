@@ -1,8 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Predmet {
+public class Predmet implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6406874098458315733L;
 	private String sifra;
 	private String naziv;
 	private Semestar semestar;
@@ -71,5 +76,11 @@ public class Predmet {
 		this.studenti = studenti;
 	}
 
+	@Override
+	public String toString() {
+		return "Predmet [sifra=" + sifra + ", naziv=" + naziv + ", semestar=" + semestar + ", godina=" + godina
+				+ ", studenti=" + studenti + "]";
+	}
+	
 	
 }

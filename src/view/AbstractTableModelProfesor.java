@@ -9,12 +9,6 @@ public class AbstractTableModelProfesor extends AbstractTableModel{
 
 	private static final long serialVersionUID = 8802202392787526904L;
 	
-//	private String[] columnNames = {"Broj licne karte", "Ime", "Prezime", "Zvanje"};
-	
-/*	public AbstractTableModelProfesor() {
-		
-	}
-*/
 	@Override
 	public int getColumnCount() {
 //		return columnNames.length;

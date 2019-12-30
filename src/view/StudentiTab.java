@@ -1,9 +1,6 @@
 package view;
 
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
 import javax.swing.JTable;
 
 public class StudentiTab extends JPanel {

@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,9 +15,7 @@ import javax.swing.JToolBar;
 
 import controllers.PredmetiController;
 import model.BazaPredmeta;
-import model.BazaProfesora;
 import model.Predmet;
-import model.Profesor;
 
 public class PredmetToolbar extends JToolBar {
 	/**
@@ -105,8 +102,7 @@ public class PredmetToolbar extends JToolBar {
 				int rowIndex = PredmetiTable.getInstance().getSelectedRow();
 				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
 				
-				JOptionPane dijalog = new JOptionPane();
-				String brLicneKarte = dijalog.showInputDialog(new JFrame(), "Unesite broj licne karte profesora", "Dodavanje profesora", JOptionPane.PLAIN_MESSAGE);
+				String brLicneKarte = JOptionPane.showInputDialog(new JFrame(), "Unesite broj licne karte profesora", "Dodavanje profesora", JOptionPane.PLAIN_MESSAGE);
 				
 				PredmetiController.getInstance().dodavanjeProfesoraNaPredmet(predmet, brLicneKarte);
 			}

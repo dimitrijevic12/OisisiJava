@@ -7,13 +7,16 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 public class ProfesorToolbar extends JToolBar {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5037256631147985137L;
 	private JTextField textField;
 	public ProfesorToolbar() {
 		
@@ -24,14 +27,17 @@ public class ProfesorToolbar extends JToolBar {
 		
 		JButton addProfesorBtn = new JButton("");
 		addProfesorBtn.setIcon(new ImageIcon("images/Add_user32.png"));
+		addProfesorBtn.setToolTipText("Dodavanje profesora");
 		panel.add(addProfesorBtn);
 		
 		JButton editProfesorBtn = new JButton("");
 		editProfesorBtn.setIcon(new ImageIcon("images/Edit32.png"));
+		editProfesorBtn.setToolTipText("Izmena profesora");
 		panel.add(editProfesorBtn);
 		
 		JButton deleteProfesorBtn = new JButton("");
 		deleteProfesorBtn.setIcon(new ImageIcon("images/Delete32.png"));
+		deleteProfesorBtn.setToolTipText("Brisanje profesora");
 		panel.add(deleteProfesorBtn);
 		
 		JPanel panel_1 = new JPanel();

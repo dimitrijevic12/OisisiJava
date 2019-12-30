@@ -1,10 +1,14 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
-public class Profesor {
+public class Profesor implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7155878792983376480L;
 	private String ime;
 	private String prezime;
 	private Date datumRodjenja;
@@ -120,46 +124,4 @@ public class Profesor {
 				+ ", adresaKancelarije=" + adresaKancelarije + ", brLicne=" + brLicne + ", titula=" + titula
 				+ ", zvanje=" + zvanje + ", predmeti=" + predmeti + "]";
 	}
-	
-	
-/*	public Object toCell(int col) {
-		switch(col) {
-		case 0: return ime;
-		case 1: return prezime;
-		case 2: return datumRodjenja;
-		case 3: return adresaStanovanja;
-		case 4: return telefon;
-		case 5: return email;
-		case 6: return adresaKancelarije;
-		case 7: return brLicne;
-		case 8: return titula;
-		case 9: return zvanje;
-		default: return null;
-		}
-	}
-
-	public void set(int col, Object value) {
-		switch(col) {
-		case 0: ime = (String)value;
-		break;
-		case 1: prezime = (String)value;
-		break;
-		case 2: datumRodjenja = (Calendar)value;
-		break;
-		case 3: adresaStanovanja = (String)value;
-		break;
-		case 4: telefon = (String)value;
-		break;
-		case 5: email = (String)value;
-		break;
-		case 6: adresaKancelarije = (String)value;
-		break;
-		case 7: brLicne = (int)value;
-		break;
-		case 8: titula = (Titula)value;
-		break;
-		case 9: zvanje = (Zvanje)value;
-		}
-	}
-*/	
 }

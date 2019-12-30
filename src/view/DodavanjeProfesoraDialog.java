@@ -32,6 +32,10 @@ import model.Titula;
 import model.Zvanje;
 
 public class DodavanjeProfesoraDialog extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4181791070180981454L;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;

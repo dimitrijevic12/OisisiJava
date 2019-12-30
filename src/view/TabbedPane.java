@@ -1,9 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 

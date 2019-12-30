@@ -1,18 +1,19 @@
 package view;
 
-import javax.swing.JToolBar;
-
-import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JTextField;
 import javax.swing.JPanel;
-import java.awt.FlowLayout;
-import javax.swing.SwingConstants;
-import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
 
 public class StudentToolbar extends JToolBar {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6187000729445067253L;
 	private JTextField textField;
 	public StudentToolbar() {
 		
@@ -23,14 +24,17 @@ public class StudentToolbar extends JToolBar {
 		
 		JButton addStudent = new JButton("");
 		addStudent.setIcon(new ImageIcon("images/Add_user32.png"));
+		addStudent.setToolTipText("Dodavanje studenta");
 		panel.add(addStudent);
 		
 		JButton editStudent = new JButton("");
 		editStudent.setIcon(new ImageIcon("images/Edit32.png"));
+		editStudent.setToolTipText("Izmena studenta");
 		panel.add(editStudent);
 		
 		JButton deleteStudent = new JButton("");
 		deleteStudent.setIcon(new ImageIcon("images/Delete32.png"));
+		deleteStudent.setToolTipText("Brisanje studenta");
 		panel.add(deleteStudent);
 		
 		JPanel panel_1 = new JPanel();

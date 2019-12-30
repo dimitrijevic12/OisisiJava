@@ -1,9 +1,14 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Student {
+public class Student implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3151702376082229142L;
 	private String ime;
 	private String prezime;
 	private Date datumRodjenja;

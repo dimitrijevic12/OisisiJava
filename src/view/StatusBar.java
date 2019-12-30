@@ -1,25 +1,23 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
-import javax.swing.Timer;
-
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class StatusBar extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9119566463576470968L;
 	JLabel status;
     JLabel clock;
     

@@ -2,17 +2,22 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import model.BazaPredmeta;
+import model.Predmet;
 
 public class MainFrame extends JFrame {
 	
@@ -48,6 +53,7 @@ public class MainFrame extends JFrame {
 		
 		tabbedPane.addChangeListener(new ChangeListener() {
 			
+			@SuppressWarnings("deprecation")
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				int tab = tabbedPane.getSelectedIndex();
@@ -73,13 +79,60 @@ public class MainFrame extends JFrame {
 				
 			}
 		});
+		
+		this.addWindowListener(new WindowListener() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				BazaPredmeta.getInstance().Deserijalizacija();
+				
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				BazaPredmeta.getInstance().Serijalizacija();
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+				
+				
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	
 	
 		setVisible(true);
 	}
 	
 	
 	public static void main(String[] args) {
+		@SuppressWarnings("unused")
 		MainFrame mf = new MainFrame();
+		
 		
 	}
 }

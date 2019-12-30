@@ -1,10 +1,24 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+import controllers.PredmetiController;
+import view.PredmetiTable;
 
-public class BazaPredmeta {
+
+public class BazaPredmeta implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3708881607457833073L;
+	
 	private static BazaPredmeta instance = null;
 	
 	public static BazaPredmeta getInstance() {
@@ -19,6 +33,7 @@ public class BazaPredmeta {
 	
 	private BazaPredmeta() {
 		initPredmete();
+		System.out.println("Konstruktor");
 		
 		this.kolone = new ArrayList<String>();
 		kolone.add("Šifra");
@@ -28,12 +43,13 @@ public class BazaPredmeta {
 		kolone.add("Godina");
 	}
 	
-	private void initPredmete() {
+	public void initPredmete() {
 		this.predmeti = new ArrayList<Predmet>();
-		
+
 		predmeti.add(new Predmet("E123", "Analiza", Semestar.PRVI, GodinaStudija.PRVA, new Profesor("Pera", "Peric", new Date(), "Micurinova 37", "333-222", "nekiTamo@gmail.com", "Radnicka", 123456, Titula.ASISTENT, Zvanje.DR, new ArrayList<Predmet>()), new ArrayList<Student>()));
 		predmeti.add(new Predmet("E222", "Verovatnoca", Semestar.ČETVRTI, GodinaStudija.DRUGA, new Profesor(), new ArrayList<Student>()));
 		predmeti.add(new Predmet("R4345", "SIMS", Semestar.ŠESTI, GodinaStudija.TRECA, new Profesor(), new ArrayList<Student>()));
+		
 	}
 	
 	public ArrayList<Predmet> getPredmeti() {
@@ -75,6 +91,10 @@ public class BazaPredmeta {
 			return null;
 		}
 	}
+	
+	public void dodajPredmet(Predmet predmet) {
+		this.predmeti.add(predmet);
+	}
 
 	public void dodajPredmet(String sifra, String naziv, Semestar semestar, GodinaStudija godina, Profesor profesor,
 			ArrayList<Student> studenti) {
@@ -101,13 +121,64 @@ public class BazaPredmeta {
 		for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
 			if(p.getBrLicne() == Integer.parseInt(brLicneKarte)) {
 				predmet.setProfesor(p);
+				p.getPredmeti().add(predmet);
 			}
 		}
 	}
 	
 	public void brisanjeProfesoraSaPredmeta(Predmet predmet) {
 		predmet.getProfesor().getPredmeti().remove(predmet);
-		predmet.setProfesor(null);
+		predmet.setProfesor(new Profesor());
+	}
+
+	@Override
+	public String toString() {
+		return "BazaPredmeta [kolone=" + kolone + ", predmeti=" + predmeti + "]";
+	}
+	
+	private Object readResolve() {
+		System.out.println("READ RESOLVE");
+		return getInstance();
+	}
+	
+	private Object writeReplace() {
+		System.out.println("WRITE REPLACE");
+		return this;
+	}
+	
+	public void Serijalizacija() {
+		try {
+			FileOutputStream fout = new FileOutputStream("test.ser");
+			ObjectOutputStream out = new ObjectOutputStream(fout);
+			out.writeObject(BazaPredmeta.getInstance().getPredmeti());
+			
+			out.close();
+			fout.close();
+		}catch (IOException ie) {
+			ie.printStackTrace();
+		}
+	}
+
+	public void Deserijalizacija() {
+		try {
+			System.out.println("\n\n");
+			FileInputStream fin = new FileInputStream("test.ser");
+			ObjectInputStream in= new ObjectInputStream(fin);
+			ArrayList<Predmet> predmeti = (ArrayList<Predmet>) in.readObject();
+			BazaPredmeta.getInstance().setPredmeti(predmeti);
+			PredmetiController.getInstance().promenaPosleDeserijalizacije();
+			
+			in.close();
+			fin.close();
+		}catch (IOException ie) {
+			ie.printStackTrace();
+		}catch (ClassNotFoundException c) {
+			c.printStackTrace();
+		}
+	}
+	
+	public void setInstance(Object o) {
+		instance = (BazaPredmeta) o;
 	}
 
 }

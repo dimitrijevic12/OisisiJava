@@ -11,6 +11,11 @@ import javax.swing.KeyStroke;
 
 	public class MainMenu extends JMenuBar {
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 5103817458709866267L;
+
 		public MainMenu(){
 			
 			setFont(new Font("Arial", Font.PLAIN, 20));
