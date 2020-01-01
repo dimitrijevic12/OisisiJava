@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 import controllers.PredmetiController;
 import view.PredmetiTable;
 
@@ -48,7 +50,7 @@ public class BazaPredmeta implements Serializable{
 
 		predmeti.add(new Predmet("E123", "Analiza", Semestar.PRVI, GodinaStudija.PRVA, new Profesor("Pera", "Peric", new Date(), "Micurinova 37", "333-222", "nekiTamo@gmail.com", "Radnicka", 123456, Titula.ASISTENT, Zvanje.DR, new ArrayList<Predmet>()), new ArrayList<Student>()));
 		predmeti.add(new Predmet("E222", "Verovatnoca", Semestar.ČETVRTI, GodinaStudija.DRUGA, new Profesor(), new ArrayList<Student>()));
-		predmeti.add(new Predmet("R4345", "SIMS", Semestar.ŠESTI, GodinaStudija.TRECA, new Profesor(), new ArrayList<Student>()));
+		predmeti.add(new Predmet("R4345", "SIMS", Semestar.ŠESTI, GodinaStudija.TREĆA, new Profesor(), new ArrayList<Student>()));
 		
 	}
 	
@@ -81,12 +83,14 @@ public class BazaPredmeta implements Serializable{
 			return predmet.getNaziv();
 		case 2:
 			String prof;
-			prof = predmet.getProfesor().getIme() + " " + predmet.getProfesor().getPrezime();
+			if(predmet.getProfesor() == null) {
+				prof = "";
+			}else prof = predmet.getProfesor().getIme() + " " + predmet.getProfesor().getPrezime();
 			return prof;
 		case 3:
 			return predmet.getSemestar().toString();
 		case 4:
-			return predmet.getGodina().name();
+			return predmet.getGodina().toString();
 		default:
 			return null;
 		}
@@ -102,12 +106,9 @@ public class BazaPredmeta implements Serializable{
 	}
 
 	public void izbrisiPredmet(Predmet p) {
-		for (Predmet i : predmeti) {
-			if (i.getSifra() == p.getSifra()) {
-				predmeti.remove(i);
-				break;
-			}
-		}
+		p.getProfesor().getPredmeti().remove(p);
+		predmeti.remove(p);
+		System.out.println(BazaProfesora.getInstance());
 	}
 
 	public void izmeniPredmet(Predmet predmet, String sifra, String naziv, Semestar semestar, GodinaStudija godina) {
@@ -120,8 +121,11 @@ public class BazaPredmeta implements Serializable{
 	public void dodajProfesoraNaPredmet(Predmet predmet, String brLicneKarte) {
 		for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
 			if(p.getBrLicne() == Integer.parseInt(brLicneKarte)) {
-				predmet.setProfesor(p);
-				p.getPredmeti().add(predmet);
+				if(predmet.getProfesor().getBrLicne() != p.getBrLicne()) {
+					predmet.getProfesor().getPredmeti().remove(p);
+					predmet.setProfesor(p);
+					p.getPredmeti().add(predmet);
+				}else JOptionPane.showMessageDialog(null, "Već postoji takav profesor na predmetu", "Greška!", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -129,21 +133,12 @@ public class BazaPredmeta implements Serializable{
 	public void brisanjeProfesoraSaPredmeta(Predmet predmet) {
 		predmet.getProfesor().getPredmeti().remove(predmet);
 		predmet.setProfesor(new Profesor());
+		System.out.println(BazaPredmeta.getInstance().getPredmeti());
 	}
 
 	@Override
 	public String toString() {
 		return "BazaPredmeta [kolone=" + kolone + ", predmeti=" + predmeti + "]";
-	}
-	
-	private Object readResolve() {
-		System.out.println("READ RESOLVE");
-		return getInstance();
-	}
-	
-	private Object writeReplace() {
-		System.out.println("WRITE REPLACE");
-		return this;
 	}
 	
 	public void serijalizacijaPredmeta() {

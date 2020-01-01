@@ -89,7 +89,7 @@ public class PredmetToolbar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int rowIndex = PredmetiTable.getInstance().getSelectedRow();
+				int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
 				System.out.println("Selected row: " + rowIndex);
 				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
 				
@@ -100,7 +100,7 @@ public class PredmetToolbar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int rowIndex = PredmetiTable.getInstance().getSelectedRow();
+				int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
 				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
 				
 				String brLicneKarte = JOptionPane.showInputDialog(new JFrame(), "Unesite broj licne karte profesora", "Dodavanje profesora", JOptionPane.PLAIN_MESSAGE);
@@ -113,7 +113,7 @@ public class PredmetToolbar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int rowIndex = PredmetiTable.getInstance().getSelectedRow();
+				int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
 				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
 				
 				IzmenaPredmetaDijalog dialog = new IzmenaPredmetaDijalog(predmet);
@@ -126,10 +126,12 @@ public class PredmetToolbar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int rowIndex = PredmetiTable.getInstance().getSelectedRow();
-				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
-				
-				PredmetiController.getInstance().brisanjeProfesoraSaPredmeta(predmet);
+				if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete profesora", "", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
+					Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
+					
+					PredmetiController.getInstance().brisanjeProfesoraSaPredmeta(predmet);
+				} else return;
 			}
 		});
 	}

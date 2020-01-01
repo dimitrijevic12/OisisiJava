@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import controllers.ProfesoriController;
 import model.BazaProfesora;
 import model.Predmet;
 import model.Profesor;
@@ -504,7 +505,7 @@ public class DodavanjeProfesoraDialog extends JDialog {
 				String zvanje = comboBox_1.getSelectedItem().toString();
 				Zvanje zvanje1 = Zvanje.valueOf(zvanje);
 				
-				BazaProfesora.getInstance().dodajProfesora(textField.getText(), textField_1.getText(), datumRodjenja, textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText(), Integer.parseInt(textField_7.getText()), titula1, zvanje1, new ArrayList<Predmet>());
+				ProfesoriController.getInstance().dodajProfesora(textField.getText(), textField_1.getText(), datumRodjenja, textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText(), Integer.parseInt(textField_7.getText()), titula1, zvanje1, new ArrayList<Predmet>());
 				
 				for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
 					System.out.println(p.toString());

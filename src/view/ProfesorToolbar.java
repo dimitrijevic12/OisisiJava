@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
@@ -74,12 +75,12 @@ public class ProfesorToolbar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				int rowIndex = ProfesoriTable.getInstance().getSelectedRow();
-				System.out.println("Selected row: " + rowIndex);
-				Profesor profesor = BazaProfesora.getInstance().getRow(rowIndex);
-				
-				ProfesoriController.getInstance().obrisiProfesora(profesor.getBrLicne());
+				if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete profesora", "", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					int rowIndex = ProfesoriTable.getInstance().convertRowIndexToModel(ProfesoriTable.getInstance().getSelectedRow());
+					Profesor profesor = BazaProfesora.getInstance().getRow(rowIndex);
+					
+					ProfesoriController.getInstance().obrisiProfesora(profesor.getBrLicne());
+				}else return;
 			}
 		});
 	
