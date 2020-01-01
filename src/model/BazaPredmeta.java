@@ -122,7 +122,7 @@ public class BazaPredmeta implements Serializable{
 		for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
 			if(p.getBrLicne() == Integer.parseInt(brLicneKarte)) {
 				if(predmet.getProfesor().getBrLicne() != p.getBrLicne()) {
-					predmet.getProfesor().getPredmeti().remove(p);
+					predmet.getProfesor().getPredmeti().remove(predmet);
 					predmet.setProfesor(p);
 					p.getPredmeti().add(predmet);
 				}else JOptionPane.showMessageDialog(null, "Već postoji takav profesor na predmetu", "Greška!", JOptionPane.ERROR_MESSAGE);

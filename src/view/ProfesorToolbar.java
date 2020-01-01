@@ -75,10 +75,9 @@ public class ProfesorToolbar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int rowIndex = ProfesoriTable.getInstance().convertRowIndexToModel(ProfesoriTable.getInstance().getSelectedRow());
+				Profesor profesor = BazaProfesora.getInstance().getRow(rowIndex);
 				if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete profesora", "", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					int rowIndex = ProfesoriTable.getInstance().convertRowIndexToModel(ProfesoriTable.getInstance().getSelectedRow());
-					Profesor profesor = BazaProfesora.getInstance().getRow(rowIndex);
-					
 					ProfesoriController.getInstance().obrisiProfesora(profesor.getBrLicne());
 				}else return;
 			}

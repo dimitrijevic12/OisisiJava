@@ -126,12 +126,12 @@ public class PredmetToolbar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete profesora", "", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
-					Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
-					
-					PredmetiController.getInstance().brisanjeProfesoraSaPredmeta(predmet);
-				} else return;
+				int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
+				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
+				if(!predmet.getProfesor().getIme().equals("")) {
+					if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete profesora", "", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)		
+						PredmetiController.getInstance().brisanjeProfesoraSaPredmeta(predmet);
+				}
 			}
 		});
 	}
