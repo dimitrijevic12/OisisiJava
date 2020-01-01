@@ -11,6 +11,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
+import controllers.PredmetiController;
+import controllers.ProfesoriController;
+import model.BazaPredmeta;
+import model.BazaProfesora;
+import model.Predmet;
+import model.Profesor;
+
 public class ProfesorToolbar extends JToolBar {
 	
 	/**
@@ -60,6 +67,19 @@ public class ProfesorToolbar extends JToolBar {
 			public void actionPerformed(ActionEvent e) {
 				DodavanjeProfesoraDialog d = new DodavanjeProfesoraDialog();
 			    d.setVisible(true);
+			}
+		});
+		
+		deleteProfesorBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				int rowIndex = ProfesoriTable.getInstance().getSelectedRow();
+				System.out.println("Selected row: " + rowIndex);
+				Profesor profesor = BazaProfesora.getInstance().getRow(rowIndex);
+				
+				ProfesoriController.getInstance().obrisiProfesora(profesor.getBrLicne());
 			}
 		});
 	

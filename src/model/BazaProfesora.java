@@ -1,10 +1,18 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import controllers.PredmetiController;
+import controllers.ProfesoriController;
 
 public class BazaProfesora implements Serializable {
 	/**
@@ -98,6 +106,11 @@ public class BazaProfesora implements Serializable {
 		for (Profesor p : profesori) {
 			if (p.getBrLicne() == brLicneKarte) {
 				profesori.remove(p);
+				for(Predmet predmet : BazaPredmeta.getInstance().getPredmeti()) {
+					if(predmet.getProfesor().getBrLicne() == p.getBrLicne()) {
+						BazaPredmeta.getInstance().brisanjeProfesoraSaPredmeta(predmet);
+					}
+				}
 				break;
 			}
 		}
@@ -127,6 +140,36 @@ public class BazaProfesora implements Serializable {
 		return "BazaProfesora [kolone=" + kolone + ", profesori=" + profesori + "]";
 	}
 	
+	public void serijalizacijaProfesora() {
+		try {
+			FileOutputStream fProf = new FileOutputStream("profesori.ser");
+			ObjectOutputStream profOut = new ObjectOutputStream(fProf);
+			profOut.writeObject(BazaProfesora.getInstance().getProfesori());
+			
+			profOut.close();
+			fProf.close();
+		}catch (IOException ie) {
+			ie.printStackTrace();
+		}
+	}
+
+	public void deserijalizacijaProfesora() {
+		try {
+			System.out.println("\n\n");
+			FileInputStream fProf = new FileInputStream("profesori.ser");
+			ObjectInputStream profIn= new ObjectInputStream(fProf);
+			ArrayList<Profesor> profesori = (ArrayList<Profesor>) profIn.readObject();
+			BazaProfesora.getInstance().setProfesori(profesori);
+			ProfesoriController.getInstance().promenaPosleDeserijalizacije();
+			
+			fProf.close();
+			profIn.close();
+		}catch (IOException ie) {
+			ie.printStackTrace();
+		}catch (ClassNotFoundException c) {
+			c.printStackTrace();
+		}
+	}
 	
 	
 }

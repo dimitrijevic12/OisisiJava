@@ -146,39 +146,35 @@ public class BazaPredmeta implements Serializable{
 		return this;
 	}
 	
-	public void Serijalizacija() {
+	public void serijalizacijaPredmeta() {
 		try {
-			FileOutputStream fout = new FileOutputStream("test.ser");
-			ObjectOutputStream out = new ObjectOutputStream(fout);
-			out.writeObject(BazaPredmeta.getInstance().getPredmeti());
+			FileOutputStream fPred = new FileOutputStream("predmeti.ser");
+			ObjectOutputStream predOut = new ObjectOutputStream(fPred);
+			predOut.writeObject(BazaPredmeta.getInstance().getPredmeti());
 			
-			out.close();
-			fout.close();
+			predOut.close();
+			fPred.close();
 		}catch (IOException ie) {
 			ie.printStackTrace();
 		}
 	}
 
-	public void Deserijalizacija() {
+	public void deserijalizacijaPredmeta() {
 		try {
 			System.out.println("\n\n");
-			FileInputStream fin = new FileInputStream("test.ser");
-			ObjectInputStream in= new ObjectInputStream(fin);
-			ArrayList<Predmet> predmeti = (ArrayList<Predmet>) in.readObject();
+			FileInputStream fPred = new FileInputStream("predmeti.ser");
+			ObjectInputStream predIn= new ObjectInputStream(fPred);
+			ArrayList<Predmet> predmeti = (ArrayList<Predmet>) predIn.readObject();
 			BazaPredmeta.getInstance().setPredmeti(predmeti);
 			PredmetiController.getInstance().promenaPosleDeserijalizacije();
 			
-			in.close();
-			fin.close();
+			fPred.close();
+			predIn.close();
 		}catch (IOException ie) {
 			ie.printStackTrace();
 		}catch (ClassNotFoundException c) {
 			c.printStackTrace();
 		}
-	}
-	
-	public void setInstance(Object o) {
-		instance = (BazaPredmeta) o;
 	}
 
 }

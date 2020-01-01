@@ -18,7 +18,7 @@ public class ProfesoriTab extends JPanel {
 		BorderLayout bLayout = new BorderLayout();
 		this.setLayout(bLayout);
 		JScrollPane scrollProf= new JScrollPane();
-		JTable profesoriTabela = new JTable(new AbstractTableModelProfesor());
+		ProfesoriTable profesoriTabela = ProfesoriTable.getInstance();
 		this.add(scrollProf, BorderLayout.CENTER);
 		scrollProf.setViewportView(profesoriTabela);
 	}

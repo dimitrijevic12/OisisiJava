@@ -90,6 +90,7 @@ public class PredmetToolbar extends JToolBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int rowIndex = PredmetiTable.getInstance().getSelectedRow();
+				System.out.println("Selected row: " + rowIndex);
 				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
 				
 				PredmetiController.getInstance().brisanjePredmetaIzTabele(predmet);
