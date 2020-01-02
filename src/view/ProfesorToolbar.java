@@ -82,6 +82,16 @@ public class ProfesorToolbar extends JToolBar {
 				}else return;
 			}
 		});
+		
+		searchProfesorBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String query = textField.getText();
+				
+				ProfesoriTable.getInstance().search(query);
+			}
+		});
 	
 	}
 }

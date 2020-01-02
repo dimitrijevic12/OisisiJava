@@ -134,6 +134,16 @@ public class PredmetToolbar extends JToolBar {
 				}
 			}
 		});
+		
+		searchPredmetBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String query = textField.getText();
+				
+				PredmetiTable.getInstance().search(query);
+			}
+		});
 	}
 	
 }
