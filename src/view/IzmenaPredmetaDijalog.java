@@ -15,10 +15,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controllers.PredmetiController;
+import model.BazaPredmeta;
 import model.GodinaStudija;
 import model.Predmet;
 import model.Semestar;
@@ -186,6 +188,13 @@ public class IzmenaPredmetaDijalog extends JDialog{
 			
 			String godina = godinaComboBox.getSelectedItem().toString();
 			GodinaStudija godina1 = GodinaStudija.valueOf(godina);
+			
+			for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+				if(sifraTextField.getText().equals(p.getSifra())) {
+					JOptionPane.showMessageDialog(null, "Već postoji predmet sa šifrom: " + sifraTextField.getText(), "Greška!", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+			}
 			
 			PredmetiController.getInstance().izmenaPredmetaIzTabele(p, sifraTextField.getText(), nazivTextField.getText(), semestar1, godina1);
 			
