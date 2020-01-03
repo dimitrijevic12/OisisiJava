@@ -119,14 +119,19 @@ public class BazaPredmeta implements Serializable{
 	}
 	
 	public void dodajProfesoraNaPredmet(Predmet predmet, String brLicneKarte) {
+		int postojiBr = 0;
 		for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
 			if(p.getBrLicne() == Integer.parseInt(brLicneKarte)) {
+				postojiBr = 1;
 				if(predmet.getProfesor().getBrLicne() != p.getBrLicne()) {
 					predmet.getProfesor().getPredmeti().remove(predmet);
 					predmet.setProfesor(p);
 					p.getPredmeti().add(predmet);
 				}else JOptionPane.showMessageDialog(null, "Već postoji takav profesor na predmetu", "Greška!", JOptionPane.ERROR_MESSAGE);
 			}
+		}
+		if(postojiBr == 0) {
+			JOptionPane.showMessageDialog(null, "Ne postoji zadati broj lične karte u bazi profesora", "Greška!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	

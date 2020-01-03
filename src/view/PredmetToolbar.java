@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
 import controllers.PredmetiController;
+import controllers.ProfesoriController;
 import model.BazaPredmeta;
 import model.Predmet;
 
@@ -72,6 +73,7 @@ public class PredmetToolbar extends JToolBar {
 		
 		JButton searchPredmetBtn = new JButton("");
 		searchPredmetBtn.setIcon(new ImageIcon("images/Search32.png"));
+		searchPredmetBtn.setToolTipText("Pretraga predmeta");
 		panel_1.add(searchPredmetBtn);
 		
 		addPredmetBtn.addActionListener(new ActionListener() {
@@ -93,7 +95,10 @@ public class PredmetToolbar extends JToolBar {
 				System.out.println("Selected row: " + rowIndex);
 				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
 				
-				PredmetiController.getInstance().brisanjePredmetaIzTabele(predmet);
+				if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete predmet", "Brisanje predmeta", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					PredmetiController.getInstance().brisanjePredmetaIzTabele(predmet);
+				}else return;
+				
 			}
 		});
 		addProfesorUPredmetBtn.addActionListener(new ActionListener() {

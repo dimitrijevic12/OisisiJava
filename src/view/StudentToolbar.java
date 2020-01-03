@@ -49,6 +49,7 @@ public class StudentToolbar extends JToolBar {
 		
 		JButton searchStudent = new JButton("");
 		searchStudent.setIcon(new ImageIcon("images/Search32.png"));
+		searchStudent.setToolTipText("Pretraga studenata");
 		panel_1.add(searchStudent);
 	}
 

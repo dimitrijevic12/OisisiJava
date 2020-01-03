@@ -60,6 +60,7 @@ public class ProfesorToolbar extends JToolBar {
 		
 		JButton searchProfesorBtn = new JButton("");
 		searchProfesorBtn.setIcon(new ImageIcon("images/Search32.png"));
+		searchProfesorBtn.setToolTipText("Pretraga profesora");
 		panel_1.add(searchProfesorBtn);
 		
 		addProfesorBtn.addActionListener(new ActionListener() {
@@ -77,7 +78,7 @@ public class ProfesorToolbar extends JToolBar {
 			public void actionPerformed(ActionEvent e) {
 				int rowIndex = ProfesoriTable.getInstance().convertRowIndexToModel(ProfesoriTable.getInstance().getSelectedRow());
 				Profesor profesor = BazaProfesora.getInstance().getRow(rowIndex);
-				if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete profesora", "", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+				if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete profesora", "Brisanje profesora", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					ProfesoriController.getInstance().obrisiProfesora(profesor.getBrLicne());
 				}else return;
 			}

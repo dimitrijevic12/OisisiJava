@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -45,6 +46,7 @@ public class DodavanjeProfesoraNaPredmet extends JDialog {
 //		BorderLayout bL1 = new BorderLayout();
 		JPanel panel = new JPanel();
 		panel.setLayout(gL);
+		panel.setBackground(Color.WHITE);
 		
 		JLabel label = new JLabel("Unesite broj licne karte profesora");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -70,6 +72,7 @@ public class DodavanjeProfesoraNaPredmet extends JDialog {
 		 JButton btnOdustanak = new JButton("Odustanak");
 		 panel2.add(btnOdustanak);
 		 panel2.add(btnPotvrda);
+		 panel2.setBackground(Color.WHITE);
 		 add(panel2, BorderLayout.SOUTH);
 		 
 		 KeyListener myKeyListener = new KeyListener() {
@@ -117,6 +120,7 @@ public class DodavanjeProfesoraNaPredmet extends JDialog {
 			}
 		});
 		
+		this.setBackground(Color.WHITE);
 		this.setSize(d.width/5, d.height/5);
 		this.setTitle("Dodavanje profesora na predmet");
 		this.setLocationRelativeTo(null);
