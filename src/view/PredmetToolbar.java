@@ -103,9 +103,12 @@ public class PredmetToolbar extends JToolBar {
 				int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
 				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
 				
-				String brLicneKarte = JOptionPane.showInputDialog(new JFrame(), "Unesite broj licne karte profesora", "Dodavanje profesora", JOptionPane.PLAIN_MESSAGE);
+				DodavanjeProfesoraNaPredmet dialog = new DodavanjeProfesoraNaPredmet();
+				dialog.setVisible(true);
 				
-				PredmetiController.getInstance().dodavanjeProfesoraNaPredmet(predmet, brLicneKarte);
+//				String brLicneKarte = JOptionPane.showInputDialog(new JFrame(), "Unesite broj licne karte profesora", "Dodavanje profesora", JOptionPane.PLAIN_MESSAGE);
+				
+//				PredmetiController.getInstance().dodavanjeProfesoraNaPredmet(predmet, brLicneKarte);
 			}
 		});
 		

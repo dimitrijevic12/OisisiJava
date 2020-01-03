@@ -48,20 +48,18 @@ public class PredmetiTable extends JTable {
 			String[] splited = parts[i].split(":");
 			if(splited.length > 1) {
 			map.put(splited[0].toLowerCase(), splited[1]);
-			System.out.println("Kljuc: " + splited[0].toLowerCase() + "\nVrednost: " + splited[1]);
 			}
 		}
 		
 		List<RowFilter<Object,Object>> rfs = new ArrayList<RowFilter<Object,Object>>();
-		if(map.get("sifra").equals("")) {
-			rfs.add(RowFilter.regexFilter(".*",  0));
-		}else rfs.add(RowFilter.regexFilter("^" + map.get("sifra") + "$",  0)); 
 		
+		rfs.add(RowFilter.regexFilter(".*" + map.get("šifra") + ".*", 0));
 		rfs.add(RowFilter.regexFilter(".*" + map.get("naziv") + ".*", 1));
 		rfs.add(RowFilter.regexFilter(".*" + map.get("profesor") + ".*", 2));
 		rfs.add(RowFilter.regexFilter(".*" + map.get("semestar") + ".*", 3));
 		rfs.add(RowFilter.regexFilter(".*" + map.get("godina") + ".*", 4));
+		
+		
 		sorter.setRowFilter(RowFilter.andFilter(rfs));
-		PredmetiTable.getInstance().setRowSorter(sorter);
 	}
 }

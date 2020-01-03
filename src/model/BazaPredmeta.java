@@ -133,7 +133,7 @@ public class BazaPredmeta implements Serializable{
 	public void brisanjeProfesoraSaPredmeta(Predmet predmet) {
 		predmet.getProfesor().getPredmeti().remove(predmet);
 		predmet.setProfesor(new Profesor());
-		System.out.println(BazaPredmeta.getInstance().getPredmeti());
+		System.out.println(BazaProfesora.getInstance());
 	}
 
 	@Override

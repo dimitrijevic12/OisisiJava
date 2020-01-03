@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -13,11 +15,16 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import controllers.PredmetiController;
+import model.BazaPredmeta;
 import model.GodinaStudija;
+import model.Predmet;
 import model.Semestar;
 
 public class DodavanjePredmetaDialog extends JDialog {
@@ -54,6 +61,7 @@ public class DodavanjePredmetaDialog extends JDialog {
 		c.weighty = 1;
 		c.anchor = GridBagConstraints.CENTER;
 		c.fill = GridBagConstraints.HORIZONTAL;
+		unosSifre.setBackground(Color.WHITE);
 		this.add(unosSifre, c);
 		
 		JLabel nazivLabel = new JLabel("Naziv");
@@ -68,6 +76,7 @@ public class DodavanjePredmetaDialog extends JDialog {
 		unosNaziva.add(nazivTextField);
 		c.gridx = 0;
 		c.gridy = 1;
+		unosNaziva.setBackground(Color.WHITE);
 		this.add(unosNaziva, c);
 		
 		JLabel semestarLabel = new JLabel("Semestar");
@@ -80,6 +89,7 @@ public class DodavanjePredmetaDialog extends JDialog {
 		unosSemestra.add(semestarComboBox);
 		c.gridx = 0;
 		c.gridy = 2;
+		unosSemestra.setBackground(Color.WHITE);
 		this.add(unosSemestra, c);
 		
 		JLabel godinaLabel = new JLabel("Godina Studija");
@@ -92,6 +102,7 @@ public class DodavanjePredmetaDialog extends JDialog {
 		unosGodine.add(godinaComboBox);
 		c.gridx = 0;
 		c.gridy = 3;
+		unosGodine.setBackground(Color.WHITE);
 		this.add(unosGodine, c);
 		
 		JButton btnOdustanak = new JButton("Odustanak");
@@ -110,6 +121,7 @@ public class DodavanjePredmetaDialog extends JDialog {
 		c.gridy = 4;
 		c.anchor = GridBagConstraints.SOUTHEAST;
 		c.fill = GridBagConstraints.NONE;
+		buttonPanel.setBackground(Color.WHITE);
 		this.add(buttonPanel, c);
 		
 btnOdustanak.addMouseListener(new MouseListener() {
@@ -166,11 +178,7 @@ btnPotvrda.addMouseListener(new MouseListener() {
 	
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		if((!sifraTextField.getText().equals("")) && !nazivTextField.getText().equals("")) {
-			btnPotvrda.setEnabled(true);
-		}
-		btnPotvrda.setBackground(Color.LIGHT_GRAY);
-		
+		btnPotvrda.setBackground(Color.LIGHT_GRAY);	
 	}
 	
 	@Override
@@ -182,15 +190,44 @@ btnPotvrda.addMouseListener(new MouseListener() {
 		String godina = godinaComboBox.getSelectedItem().toString();
 		GodinaStudija godina1 = GodinaStudija.valueOf(godina);
 		
-/*		for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
-			System.out.println(p.toString());
+		for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+			if(sifraTextField.getText().equals(p.getSifra())) {
+				JOptionPane.showMessageDialog(null, "Već postoji predmet sa šifrom: " + sifraTextField.getText(), "Greška!", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 		}
-*/		
+		
 		PredmetiController.getInstance().dodavanjePredmetaUTabelu(sifraTextField.getText(), nazivTextField.getText(), semestar1, godina1);
 		
 		dispose();
 	}
 	});
+
+		KeyListener myKeyListener = new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(sifraTextField.getText().trim().length() > 0 && nazivTextField.getText().trim().length() > 0) {
+					btnPotvrda.setEnabled(true);
+				}else btnPotvrda.setEnabled(false);
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+		
+		sifraTextField.addKeyListener(myKeyListener);
+		nazivTextField.addKeyListener(myKeyListener);
 		
 		this.setTitle("Dodavanje predmeta");
 		this.setModal(true);
@@ -198,5 +235,5 @@ btnPotvrda.addMouseListener(new MouseListener() {
 		this.setLocationRelativeTo(null);
 		getContentPane().setBackground(Color.WHITE);
 	}
-
+	
 }

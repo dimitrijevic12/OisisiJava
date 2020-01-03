@@ -496,7 +496,7 @@ public class DodavanjeProfesoraDialog extends JDialog {
 					datumRodjenja = new SimpleDateFormat("dd/MM/yyyy").parse(textField_2.getText());
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(new JFrame(), "Unesite u obliku (dd/mm/yyy)", "Pogresno unet datum!", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(new JFrame(), "Unesite u obliku (dd/mm/yyyy)", "Pogresno unet datum!", JOptionPane.ERROR_MESSAGE);
 					e1.printStackTrace();
 				} 
 				String titula = comboBox.getSelectedItem().toString();

@@ -57,10 +57,7 @@ public class ProfesoriTable extends JTable {
 		}
 		
 		List<RowFilter<Object,Object>> rfs = new ArrayList<RowFilter<Object,Object>>();
-		if(map.get("br.lične").equals("")) {
-			rfs.add(RowFilter.regexFilter(".*",  0));
-		}else rfs.add(RowFilter.regexFilter("^" + map.get("br.lične") + "$",  0)); 
-		
+		rfs.add(RowFilter.regexFilter(".*" + map.get("br.lične") + ".*",  0)); 
 		rfs.add(RowFilter.regexFilter(".*" + map.get("ime") + ".*", 1));
 		rfs.add(RowFilter.regexFilter(".*" + map.get("prezime") + ".*", 2));
 		rfs.add(RowFilter.regexFilter(".*" + map.get("datum rođenja") + ".*", 3));
@@ -71,6 +68,5 @@ public class ProfesoriTable extends JTable {
 		rfs.add(RowFilter.regexFilter(".*" + map.get("titula") + ".*", 8));
 		rfs.add(RowFilter.regexFilter(".*" + map.get("zvanje") + ".*", 9));
 		sorter.setRowFilter(RowFilter.andFilter(rfs));
-		ProfesoriTable.getInstance().setRowSorter(sorter);
 	}
 }

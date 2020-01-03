@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -49,6 +51,7 @@ public class IzmenaPredmetaDijalog extends JDialog{
 			JPanel unosSifre = new JPanel();
 			unosSifre.add(sifraLabel);
 			unosSifre.add(sifraTextField);
+			unosSifre.setBackground(Color.WHITE);
 			c.gridx = 0;
 			c.gridy = 0;
 			c.weightx = 1;
@@ -67,6 +70,7 @@ public class IzmenaPredmetaDijalog extends JDialog{
 			JPanel unosNaziva = new JPanel();
 			unosNaziva.add(nazivLabel);
 			unosNaziva.add(nazivTextField);
+			unosNaziva.setBackground(Color.WHITE);
 			c.gridx = 0;
 			c.gridy = 1;
 			this.add(unosNaziva, c);
@@ -79,6 +83,7 @@ public class IzmenaPredmetaDijalog extends JDialog{
 			JPanel unosSemestra = new JPanel();
 			unosSemestra.add(semestarLabel);
 			unosSemestra.add(semestarComboBox);
+			unosSemestra.setBackground(Color.WHITE);
 			c.gridx = 0;
 			c.gridy = 2;
 			this.add(unosSemestra, c);
@@ -91,6 +96,7 @@ public class IzmenaPredmetaDijalog extends JDialog{
 			JPanel unosGodine = new JPanel();
 			unosGodine.add(godinaLabel);
 			unosGodine.add(godinaComboBox);
+			unosGodine.setBackground(Color.WHITE);
 			c.gridx = 0;
 			c.gridy = 3;
 			this.add(unosGodine, c);
@@ -106,6 +112,7 @@ public class IzmenaPredmetaDijalog extends JDialog{
 			JPanel buttonPanel = new JPanel();
 			buttonPanel.add(btnOdustanak);
 			buttonPanel.add(btnPotvrda);
+			buttonPanel.setBackground(Color.WHITE);
 			c.gridx = 0;
 			c.gridy = 4;
 			c.anchor = GridBagConstraints.SOUTHEAST;
@@ -185,7 +192,32 @@ public class IzmenaPredmetaDijalog extends JDialog{
 			dispose();
 			}
 		});
+	
+	KeyListener myKeyListener = new KeyListener() {
+		
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
 			
+		}
+		
+		@Override
+		public void keyReleased(KeyEvent e) {
+			if(sifraTextField.getText().trim().length() > 0 && nazivTextField.getText().trim().length() > 0) {
+				btnPotvrda.setEnabled(true);
+			}else btnPotvrda.setEnabled(false);
+			
+		}
+		
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
+	
+			sifraTextField.addKeyListener(myKeyListener);
+			nazivTextField.addKeyListener(myKeyListener);
 			this.setTitle("Dodavanje predmeta");
 			this.setModal(true);
 			this.setResizable(false);
