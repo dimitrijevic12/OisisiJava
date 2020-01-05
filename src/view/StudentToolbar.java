@@ -2,6 +2,8 @@ package view;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -51,6 +53,18 @@ public class StudentToolbar extends JToolBar {
 		searchStudent.setIcon(new ImageIcon("images/Search32.png"));
 		searchStudent.setToolTipText("Pretraga studenata");
 		panel_1.add(searchStudent);
+		
+		
+		addStudent.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				DodavanjeStudentaDijalog d=new DodavanjeStudentaDijalog();
+				d.setVisible(true);
+			}
+			
+		});
 	}
 
 }

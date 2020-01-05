@@ -17,13 +17,13 @@ public class Student implements Serializable{
 	private String email;
 	private String indeks;
 	private Date datumUpisa;
-	private Integer godinaStudija;
+	private GodinaStudija godinaStudija;
 	private Status status;
-	private Float prosek;
+	private Double prosek;
 	private ArrayList<Predmet> predmeti;
 	
 	public Student(String ime, String prezime, Date datumRodjenja, String adresaStanovanja, String telefon,
-			String email, String indeks, Date datumUpisa, Integer godinaStudija, Status status, Float prosek) {
+			String email, String indeks, Date datumUpisa, GodinaStudija godinaStudija, Status status, double d) {
 		super();
 		this.ime = ime;
 		this.prezime = prezime;
@@ -35,7 +35,7 @@ public class Student implements Serializable{
 		this.datumUpisa = datumUpisa;
 		this.godinaStudija = godinaStudija;
 		this.status = status;
-		this.prosek = prosek;
+		this.prosek = d;
 		predmeti= new ArrayList<Predmet>();
 	}
 
@@ -103,11 +103,11 @@ public class Student implements Serializable{
 		this.datumUpisa = datumUpisa;
 	}
 
-	public Integer getGodinaStudija() {
+	public GodinaStudija getGodinaStudija() {
 		return godinaStudija;
 	}
 
-	public void setGodinaStudija(Integer godinaStudija) {
+	public void setGodinaStudija(GodinaStudija godinaStudija) {
 		this.godinaStudija = godinaStudija;
 	}
 
@@ -119,11 +119,11 @@ public class Student implements Serializable{
 		this.status = status;
 	}
 
-	public Float getProsek() {
+	public Double getProsek() {
 		return prosek;
 	}
 
-	public void setProsek(Float prosek) {
+	public void setProsek(Double prosek) {
 		this.prosek = prosek;
 	}
 
