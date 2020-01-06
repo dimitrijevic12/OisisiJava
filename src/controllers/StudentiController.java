@@ -30,4 +30,10 @@ public class StudentiController {
 		model.fireTableDataChanged();
 	}
 	
+	public void brisanjeStudenta(Student s) {
+		BazaStudent.getInstance().brisanjeStudenta(s);
+		AbstractTableModelStudent model = (AbstractTableModelStudent) StudentiTable.getInstance().getModel();
+		model.fireTableDataChanged();
+	}
+	
 }

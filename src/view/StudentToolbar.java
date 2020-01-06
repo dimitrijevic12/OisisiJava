@@ -7,10 +7,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
+import controllers.PredmetiController;
+import controllers.StudentiController;
 import model.BazaPredmeta;
 import model.BazaStudent;
 import model.Predmet;
@@ -83,6 +86,24 @@ public class StudentToolbar extends JToolBar {
 				d.setVisible(true);
 			}
 			});
+		
+		deleteStudent.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				int rowIndex = StudentiTable.getInstance().convertRowIndexToModel(StudentiTable.getInstance().getSelectedRow());
+				Student student = BazaStudent.getInstance().getRow(rowIndex);
+				
+				String poruka =("Da li ste sigurni da želite da obrišete "+student.getIme()+" "+student.getPrezime())+" ?";
+				
+				if(JOptionPane.showConfirmDialog(null, poruka, "Brisanje predmeta", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					StudentiController.getInstance().brisanjeStudenta(student);
+				}else return;
+				
+			}});
+		
 		}
 	
 

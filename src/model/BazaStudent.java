@@ -122,4 +122,16 @@ public class BazaStudent  {
 			
 			}
 	}
+	
+	public void brisanjeStudenta(Student s) {
+		ListIterator<Student> iterator = studenti.listIterator();
+		while (iterator.hasNext()) {
+			Student student=iterator.next();
+				if(student.getIndeks().equals(s.getIndeks())) {
+					iterator.remove();
+					}
+				}
+	}
+	
+	
 }
