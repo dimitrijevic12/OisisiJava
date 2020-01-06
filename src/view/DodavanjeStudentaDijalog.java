@@ -1,6 +1,5 @@
 package view;
 
-	import java.awt.BorderLayout;
 	import java.awt.Color;
 	import java.awt.Dimension;
 	import java.awt.FlowLayout;
@@ -11,24 +10,24 @@ package view;
 	import java.awt.Toolkit;
 	import java.awt.event.MouseEvent;
 	import java.awt.event.MouseListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+	import java.text.ParseException;
+	import java.text.SimpleDateFormat;
+	import java.util.Calendar;
+	import java.util.Date;
 
-import javax.swing.ButtonGroup;
+	import javax.swing.ButtonGroup;
 	import javax.swing.JButton;
-	import javax.swing.JCheckBox;
 	import javax.swing.JComboBox;
 	import javax.swing.JDialog;
-import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
+	import javax.swing.JFrame;
 	import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+	import javax.swing.JOptionPane;
+	import javax.swing.JPanel;
 	import javax.swing.JRadioButton;
 	import javax.swing.JTextField;
 	import javax.swing.SwingConstants;
 
+import controllers.StudentiController;
 import model.BazaStudent;
 import model.GodinaStudija;
 import model.Status;
@@ -46,9 +45,10 @@ import model.Student;
 		JComboBox cbGodina;
 		JRadioButton rbBudzet,rbFinansiranje;
 		JPanel p1,p2,p3,p4,p5,p6,p7,p8,p9,p10;
-		Student student;
+		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
 		
-		public DodavanjeStudentaDijalog() {
+		
+		public DodavanjeStudentaDijalog(int i,Student s) {
 			Toolkit kit = Toolkit.getDefaultToolkit();
 			Dimension d = new Dimension();
 			d = kit.getScreenSize();
@@ -61,6 +61,9 @@ import model.Student;
 			gridBagLayout.columnWeights = new double[]{1.0};
 			gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 			getContentPane().setLayout(gridBagLayout);
+			
+			
+				
 			
 			//ime
 			p1=new JPanel();
@@ -88,7 +91,11 @@ import model.Student;
 			p1.add(lIme, gbc_lblNewLabel);
 			lIme.setHorizontalAlignment(SwingConstants.LEFT);
 			
-			tIme = new JTextField();
+			if(i==0)
+				tIme = new JTextField();
+			else
+				tIme= new JTextField(s.getIme());
+			
 			tIme.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			GridBagConstraints gbc_textField = new GridBagConstraints();
 			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
@@ -122,7 +129,11 @@ import model.Student;
 			p2.add(lPrezime, gbc_lblNewLabel);
 			lPrezime.setHorizontalAlignment(SwingConstants.LEFT);
 			
-			tPrezime = new JTextField();
+			if(i==0)
+				tPrezime = new JTextField();
+			else
+				tPrezime= new JTextField(s.getPrezime());
+			
 			tPrezime.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 			gbc_lblNewLabel.insets = new Insets(10, 0, 0, 0);
@@ -156,7 +167,11 @@ import model.Student;
 			p3.add(lDatum, gbc_lblNewLabel);
 			
 			
-			tDatum = new JFormattedTextField();
+			if(i==0)
+				tDatum = new JTextField();
+			else
+				tDatum= new JTextField(sdf.format(s.getDatumRodjenja()));
+			
 			tDatum.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textField.gridx = 1;
@@ -188,7 +203,11 @@ import model.Student;
 			gbc_lblNewLabel.gridy = 0;
 			p4.add(lAdresa, gbc_lblNewLabel);
 			
-			tAdresa = new JTextField();
+			if(i==0)
+				tAdresa = new JTextField();
+			else
+				tAdresa= new JTextField(s.getAdresaStanovanja());
+			
 			tAdresa.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textField.gridx = 1;
@@ -221,7 +240,11 @@ import model.Student;
 			gbc_lblNewLabel.gridy = 0;
 			p5.add(lTelefon, gbc_lblNewLabel);
 			
-			tTelefon = new JTextField();
+			if(i==0)
+				tTelefon = new JTextField();
+			else
+				tTelefon= new JTextField(s.getTelefon());
+			
 			tTelefon.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textField.gridx = 1;
@@ -253,7 +276,14 @@ import model.Student;
 			gbc_lblNewLabel.gridy = 0;
 			p6.add(lIndex, gbc_lblNewLabel);
 			
-			tIndex = new JTextField();
+			if(i==0)
+				tIndex = new JTextField();
+			else
+				{
+					tIndex= new JTextField(s.getIndeks());
+					tIndex.setEditable(false);
+				}
+			
 			tIndex.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textField.gridx = 1;
@@ -287,6 +317,7 @@ import model.Student;
 			
 			
 			cbGodina=new JComboBox(GodinaStudija.values());
+			
 			cbGodina.setBackground(Color.WHITE);
 			cbGodina.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
@@ -314,10 +345,27 @@ import model.Student;
 			
 			ButtonGroup bg=new ButtonGroup();    
 			
-			rbBudzet=new JRadioButton("Budzet",true);
+				if(i==1)
+					{
+					if(s.getStatus()==Status.S)
+					{
+						rbBudzet=new JRadioButton("Budzet",false);
+						rbFinansiranje= new JRadioButton("Samofinansiranje",true);
+						}
+					else
+					{
+						rbBudzet=new JRadioButton("Budzet",true);
+						rbFinansiranje= new JRadioButton("Samofinansiranje",false);
+						}
+					}
+				else if(i==0)
+					{
+						rbBudzet=new JRadioButton("Budzet",true);
+						rbFinansiranje= new JRadioButton("Samofinansiranje",false);
+					}
 			rbBudzet.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			rbBudzet.setBackground(Color.WHITE);
-			rbFinansiranje= new JRadioButton("Samofinansiranje");
+
 			rbFinansiranje.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			rbFinansiranje.setBackground(Color.WHITE);
 			bg.add(rbBudzet);
@@ -344,6 +392,8 @@ import model.Student;
 			gbc_panel.gridx = 0;
 			gbc_panel.gridy = 10;
 			getContentPane().add(p9, gbc_panel);
+			
+			
 			
 			JButton btnOdustanak = new JButton("Odustanak");
 			btnOdustanak.setForeground(Color.BLACK);
@@ -401,26 +451,7 @@ import model.Student;
 				public void mouseReleased(MouseEvent e) {
 					// TODO Auto-generated method stub
 						
-					SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
-					Date datumRodjenja=null;
-					try {
-						datumRodjenja = sdf.parse(tDatum.getText());
-					} catch (ParseException e1) {
-						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(new JFrame(), "Unesite u obliku (dd/mm/yyyy)", "Pogresno unet datum!", JOptionPane.ERROR_MESSAGE);
-						e1.printStackTrace();
-					}
 					
-					Status s;
-					
-					if(rbBudzet.isSelected())
-						s=Status.B;
-					else
-						s=Status.S;
-					
-				
-					
-					BazaStudent.getInstance().dodajStudenta(tIme.getText(), tPrezime.getText(),datumRodjenja, tAdresa.getText(), tTelefon.getText(), "", tIndex.getText(), (GodinaStudija)cbGodina.getSelectedItem(),s, 0.00);
 					
 				}
 				
@@ -445,8 +476,34 @@ import model.Student;
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					// TODO Auto-generated method stubs
+			       if (!(tIme.getText().trim().isEmpty()||tPrezime.getText().trim().isEmpty() )) {
+					SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+					Date datumRodjenja=null;
+					try {
+						datumRodjenja = sdf.parse(tDatum.getText());
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(new JFrame(), "Unesite u obliku (dd/mm/yyyy)", "Pogresno unet datum!", JOptionPane.ERROR_MESSAGE);
+						e1.printStackTrace();
+					}
+					
+					Status status;
+					GodinaStudija godinaStudija=(GodinaStudija)cbGodina.getSelectedItem();
+					
+					if(rbBudzet.isSelected())
+						status=Status.B;
+					else
+						status=Status.S;
+					Student student;
+					student= new Student(tIme.getText(), tPrezime.getText(),datumRodjenja, tAdresa.getText(), tTelefon.getText(), "", tIndex.getText(),Calendar.getInstance().getTime(), godinaStudija,status, 0.00);
+					if(i==0)
+						StudentiController.getInstance().dodajStudenta(student);
+						
+					else if(i==1)
+						StudentiController.getInstance().izmeniStudenta(student);
 				}
-			});
+				else {JOptionPane.showMessageDialog(new JFrame(), "Popunite sva obavezna polja", "Obavezna polja nisu popunjena!", JOptionPane.ERROR_MESSAGE);}
+				}});
 			
 			
 			this.setName("Dodavanje studenta");

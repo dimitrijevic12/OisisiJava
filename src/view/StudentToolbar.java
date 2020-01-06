@@ -11,6 +11,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
+import model.BazaPredmeta;
+import model.BazaStudent;
+import model.Predmet;
+import model.Student;
+
 public class StudentToolbar extends JToolBar {
 	/**
 	 * 
@@ -60,11 +65,25 @@ public class StudentToolbar extends JToolBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				DodavanjeStudentaDijalog d=new DodavanjeStudentaDijalog();
+				DodavanjeStudentaDijalog d=new DodavanjeStudentaDijalog(0,null);
 				d.setVisible(true);
 			}
 			
 		});
-	}
+		
+		editStudent.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int rowIndex = StudentiTable.getInstance().convertRowIndexToModel(StudentiTable.getInstance().getSelectedRow());
+				Student student = BazaStudent.getInstance().getRow(rowIndex);
+				
+				DodavanjeStudentaDijalog d=new DodavanjeStudentaDijalog(1,student);
+				d.setVisible(true);
+			}
+			});
+		}
+	
 
 }

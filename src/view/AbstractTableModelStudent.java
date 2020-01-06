@@ -41,9 +41,9 @@ public class AbstractTableModelStudent extends AbstractTableModel{
 		return false;
 	}
 	
-	/*@Override
+	@Override
 	public void setValueAt(Object value, int row, int col) {
 		super.setValueAt(value, row, col);
-	}*/
+	}
 
 }

@@ -12,8 +12,8 @@ public class TabbedPane extends JTabbedPane {
 
 	public TabbedPane() {
 		
-		JPanel panel = new JPanel();
-		this.addTab("Studenti", panel);
+		StudentiTab studenti = new StudentiTab();
+		this.addTab("Studenti", studenti);
 		
 		ProfesoriTab profesori = new ProfesoriTab();
 		this.addTab("Profesori", profesori);

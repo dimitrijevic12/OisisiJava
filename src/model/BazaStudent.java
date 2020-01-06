@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.ListIterator;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -96,9 +98,28 @@ public class BazaStudent  {
 		}
 	}
 	
-	public void dodajStudenta(String ime, String prezime, Date datumRodjenja, String adresaStanovanja, String telefon,
-			String email, String indeks, GodinaStudija godinaStudija, Status status, double d) {
-		this.studenti.add(new Student(ime, prezime, datumRodjenja, adresaStanovanja, telefon, email, indeks,Calendar.getInstance().getTime(),godinaStudija,status,d));
+	public void dodajStudenta(Student s) {
+		this.studenti.add(s);
+		
 	}
 	
+	public void izmeniStudenta(Student s) {
+		ListIterator<Student> iterator = studenti.listIterator();
+		while (iterator.hasNext()) {
+			Student student=iterator.next();
+				if(student.getIndeks().equals(s.getIndeks())) {
+					student.setIme(s.getIme());
+					student.setPrezime(s.getPrezime());
+					student.setAdresaStanovanja(s.getAdresaStanovanja());
+					student.setEmail(s.getEmail());
+					student.setTelefon(s.getTelefon());
+					student.setGodinaStudija(s.getGodinaStudija());
+					student.setStatus(s.getStatus());
+					student.setDatumRodjenja(s.getDatumRodjenja());
+					iterator.set(student);
+					System.out.println(iterator.toString());
+				}
+			
+			}
+	}
 }

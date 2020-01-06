@@ -22,6 +22,22 @@ public class Student implements Serializable{
 	private Double prosek;
 	private ArrayList<Predmet> predmeti;
 	
+	public Student() {
+		super();
+		this.ime = "";
+		this.prezime = "";
+		this.datumRodjenja = new Date();
+		this.adresaStanovanja = "";
+		this.telefon = "";
+		this.email = "";
+		this.indeks = "";
+		this.datumUpisa = new Date();
+		this.godinaStudija = GodinaStudija.PRVA;
+		this.status = Status.B;
+		this.prosek =0.00;
+		predmeti= new ArrayList<Predmet>();
+	}
+
 	public Student(String ime, String prezime, Date datumRodjenja, String adresaStanovanja, String telefon,
 			String email, String indeks, Date datumUpisa, GodinaStudija godinaStudija, Status status, double d) {
 		super();
@@ -146,5 +162,15 @@ public class Student implements Serializable{
 		return predmeti.remove(predmet);
 		
 	}
+
+	@Override
+	public String toString() {
+		return "Student [ime=" + ime + ", prezime=" + prezime + ", datumRodjenja=" + datumRodjenja
+				+ ", adresaStanovanja=" + adresaStanovanja + ", telefon=" + telefon + ", email=" + email + ", indeks="
+				+ indeks + ", datumUpisa=" + datumUpisa + ", godinaStudija=" + godinaStudija + ", status=" + status
+				+ ", prosek=" + prosek + ", predmeti=" + predmeti + "]";
+	}
+	
+	
 	
 }
