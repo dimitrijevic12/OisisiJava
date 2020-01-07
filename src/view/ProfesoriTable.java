@@ -29,6 +29,7 @@ public class ProfesoriTable extends JTable {
 	
 	private ProfesoriTable() {
 		this.setModel(new AbstractTableModelProfesor());
+		new ButtonColumnProfesori(this, 10);
 		sorter = new TableRowSorter<>((AbstractTableModelProfesor) getModel());
 		this.setRowSorter(sorter);
 	}
