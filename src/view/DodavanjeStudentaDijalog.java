@@ -316,8 +316,9 @@ import model.Student;
 			p7.add(lGodina, gbc_lblNewLabel);
 			
 			
-			cbGodina=new JComboBox(GodinaStudija.values());
-			
+			cbGodina=new JComboBox<GodinaStudija>(GodinaStudija.values());
+			if(i==1)
+				cbGodina.setSelectedItem(s.getGodinaStudija());
 			cbGodina.setBackground(Color.WHITE);
 			cbGodina.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
@@ -506,8 +507,15 @@ import model.Student;
 				}});
 			
 			
-			this.setName("Dodavanje studenta");
-			this.setTitle("Dodavanje studenta");
+			if(i==0) {
+				this.setName("Dodavanje studenta");
+				this.setTitle("Dodavanje studenta");
+			}
+			else {
+				this.setName("Izmena studenta");
+				this.setTitle("Izmena studenta");
+			}
+				
 			this.setModal(true);
 			this.setResizable(false);
 			this.setLocationRelativeTo(null);

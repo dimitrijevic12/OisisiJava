@@ -102,6 +102,8 @@ public class BazaProfesora implements Serializable {
 		this.profesori.add(new Profesor(ime, prezime, datumRodjenja, adresaStanovanja, telefon, email, adresaKancelarije, brLicne, titula, zvanje, predmeti));
 	}
 	
+	
+	
 	public void izbrisiProfesora(int brLicneKarte) {
 		for (Profesor p : profesori) {
 			if (p.getBrLicne() == brLicneKarte) {

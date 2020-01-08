@@ -56,9 +56,9 @@ public class MainFrame extends JFrame {
 			
 			@SuppressWarnings("deprecation")
 			@Override
-			public void stateChanged(ChangeEvent e) {
+			public void stateChanged(ChangeEvent e) {		
 				int tab = tabbedPane.getSelectedIndex();
-				
+				menu.setTab(tab);
 				if(tab == 0) {
 					getContentPane().add(studentToolbar,  BorderLayout.NORTH);
 					studentToolbar.show();

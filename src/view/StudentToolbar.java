@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -79,12 +80,18 @@ public class StudentToolbar extends JToolBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+			if(!StudentiTable.getInstance().getSelectionModel().isSelectionEmpty()) {
 				int rowIndex = StudentiTable.getInstance().convertRowIndexToModel(StudentiTable.getInstance().getSelectedRow());
 				Student student = BazaStudent.getInstance().getRow(rowIndex);
 				
 				DodavanjeStudentaDijalog d=new DodavanjeStudentaDijalog(1,student);
 				d.setVisible(true);
 			}
+				else
+				{
+					JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati studenta kog zelite da izmenite ", "Student nije izabran!", JOptionPane.ERROR_MESSAGE);
+				}
+				}
 			});
 		
 		deleteStudent.addActionListener(new ActionListener() {
@@ -92,15 +99,21 @@ public class StudentToolbar extends JToolBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				if(!StudentiTable.getInstance().getSelectionModel().isSelectionEmpty()) {
+					int rowIndex = StudentiTable.getInstance().convertRowIndexToModel(StudentiTable.getInstance().getSelectedRow());
+						Student student = BazaStudent.getInstance().getRow(rowIndex);
 				
-				int rowIndex = StudentiTable.getInstance().convertRowIndexToModel(StudentiTable.getInstance().getSelectedRow());
-				Student student = BazaStudent.getInstance().getRow(rowIndex);
+							String poruka =("Da li ste sigurni da želite da obrišete "+student.getIme()+" "+student.getPrezime())+" ?";
 				
-				String poruka =("Da li ste sigurni da želite da obrišete "+student.getIme()+" "+student.getPrezime())+" ?";
-				
-				if(JOptionPane.showConfirmDialog(null, poruka, "Brisanje predmeta", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					StudentiController.getInstance().brisanjeStudenta(student);
+								if(JOptionPane.showConfirmDialog(null, poruka, "Brisanje predmeta", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+									StudentiController.getInstance().brisanjeStudenta(student);
 				}else return;
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati studenta kog zelite da obrisete ", "Student nije izabran!", JOptionPane.ERROR_MESSAGE);
+				}
+					
 				
 			}});
 		
