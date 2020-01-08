@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -67,7 +68,7 @@ public class ProfesorToolbar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DodavanjeProfesoraDialog d = new DodavanjeProfesoraDialog();
+				DodavanjeProfesoraDialog d = new DodavanjeProfesoraDialog(0,null);
 			    d.setVisible(true);
 			}
 		});
@@ -83,6 +84,24 @@ public class ProfesorToolbar extends JToolBar {
 				}else return;
 			}
 		});
+		editProfesorBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(!ProfesoriTable.getInstance().getSelectionModel().isSelectionEmpty()) {
+					int rowIndex = ProfesoriTable.getInstance().convertRowIndexToModel(ProfesoriTable.getInstance().getSelectedRow());
+					Profesor profesor = BazaProfesora.getInstance().getRow(rowIndex);
+					
+					
+					DodavanjeProfesoraDialog d=new DodavanjeProfesoraDialog(1,profesor);
+					d.setVisible(true);
+				}
+					else
+					{
+						JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati profesora kog zelite da izmenite ", "Profesor nije izabran!", JOptionPane.ERROR_MESSAGE);
+					}
+				}});
 		
 		searchProfesorBtn.addActionListener(new ActionListener() {
 			

@@ -40,19 +40,19 @@ import model.Student;
 		 */
 		private static final long serialVersionUID = 7597576125968335383L;
 		
-		JLabel lIme,lPrezime,lDatum,lAdresa,lTelefon,lIndex,lGodina;
-		JTextField tIme,tPrezime,tDatum,tAdresa,tTelefon,tIndex;
-		JComboBox cbGodina;
-		JRadioButton rbBudzet,rbFinansiranje;
-		JPanel p1,p2,p3,p4,p5,p6,p7,p8,p9,p10;
-		SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+		private JLabel lIme,lPrezime,lDatum,lAdresa,lTelefon,lIndex,lGodina;
+		private JTextField tIme,tPrezime,tDatum,tAdresa,tTelefon,tIndex;
+		private JComboBox cbGodina;
+		private JRadioButton rbBudzet,rbFinansiranje;
+		private JPanel p1,p2,p3,p4,p5,p6,p7,p8,p9,p10;
+		private SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
 		
 		
 		public DodavanjeStudentaDijalog(int i,Student s) {
 			Toolkit kit = Toolkit.getDefaultToolkit();
 			Dimension d = new Dimension();
 			d = kit.getScreenSize();
-			d.setSize(d.width/3, d.height/1.6);
+			d.setSize(d.width/3, d.height/1.5);
 			setSize(d);
 		
 			GridBagLayout gridBagLayout = new GridBagLayout();

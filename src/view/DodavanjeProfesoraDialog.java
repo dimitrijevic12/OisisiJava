@@ -61,11 +61,13 @@ public class DodavanjeProfesoraDialog extends JDialog {
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JPanel panel_11;
-	public DodavanjeProfesoraDialog() {
+	private SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+	
+	public DodavanjeProfesoraDialog(int i,Profesor profesor) {
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension d = new Dimension();
 		d = kit.getScreenSize();
-		d.setSize(d.width/4, d.height/1.5);
+		d.setSize(d.width/3, d.height/1.5);
 		setSize(d);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -101,7 +103,10 @@ public class DodavanjeProfesoraDialog extends JDialog {
 		panel_1.add(lblNewLabel, gbc_lblNewLabel);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		
-		textField = new JTextField();
+		if(i==0)
+			textField = new JTextField();
+		else 
+			textField = new JTextField(profesor.getIme());
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
@@ -134,7 +139,10 @@ public class DodavanjeProfesoraDialog extends JDialog {
 		gbc_lblNewLabel_1.gridy = 0;
 		panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		textField_1 = new JTextField();
+		if(i==0)
+			textField_1 = new JTextField();
+		else 
+			textField_1 = new JTextField(profesor.getPrezime());
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
@@ -167,7 +175,11 @@ public class DodavanjeProfesoraDialog extends JDialog {
 		gbc_lblNewLabel_2.gridy = 0;
 		panel_3.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		textField_2 = new JTextField();
+		if(i==0)
+			textField_2 = new JTextField();
+		else 
+			textField_2 = new JTextField(sdf.format(profesor.getDatumRodjenja()));
+		
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
@@ -200,7 +212,10 @@ public class DodavanjeProfesoraDialog extends JDialog {
 		gbc_lblNewLabel_3.gridy = 0;
 		panel_4.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
-		textField_3 = new JTextField();
+		if(i==0)
+			textField_3 = new JTextField();
+		else 
+			textField_3 = new JTextField(profesor.getAdresaStanovanja());
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
 		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
@@ -233,7 +248,10 @@ public class DodavanjeProfesoraDialog extends JDialog {
 		gbc_lblNewLabel_4.gridy = 0;
 		panel_5.add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
-		textField_4 = new JTextField();
+		if(i==0)
+			textField_4 = new JTextField();
+		else 
+			textField_4 = new JTextField(profesor.getTelefon());
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
 		gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
@@ -266,7 +284,10 @@ public class DodavanjeProfesoraDialog extends JDialog {
 		gbc_lblNewLabel_5.gridy = 0;
 		panel_6.add(lblNewLabel_5, gbc_lblNewLabel_5);
 		
-		textField_5 = new JTextField();
+		if(i==0)
+			textField_5 = new JTextField();
+		else 
+			textField_5 = new JTextField(profesor.getTelefon());
 		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_textField_5 = new GridBagConstraints();
 		gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
@@ -299,7 +320,10 @@ public class DodavanjeProfesoraDialog extends JDialog {
 		gbc_lblNewLabel_6.gridy = 0;
 		panel_7.add(lblNewLabel_6, gbc_lblNewLabel_6);
 		
-		textField_6 = new JTextField();
+		if(i==0)
+			textField_6 = new JTextField();
+		else 
+			textField_6 = new JTextField(profesor.getAdresaStanovanja());
 		textField_6.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_textField_6 = new GridBagConstraints();
 		gbc_textField_6.fill = GridBagConstraints.HORIZONTAL;
@@ -332,7 +356,14 @@ public class DodavanjeProfesoraDialog extends JDialog {
 		gbc_lblNewLabel_7.gridy = 0;
 		panel_8.add(lblNewLabel_7, gbc_lblNewLabel_7);
 		
-		textField_7 = new JTextField();
+		
+		if(i==0)
+			textField_7 = new JTextField();
+		else 
+			{
+			textField_7 = new JTextField(((Integer)profesor.getBrLicne()).toString());
+			textField_7.setEditable(false);
+			}
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_textField_7 = new GridBagConstraints();
 		gbc_textField_7.fill = GridBagConstraints.HORIZONTAL;
@@ -365,7 +396,9 @@ public class DodavanjeProfesoraDialog extends JDialog {
 		gbc_lblNewLabel_8.gridy = 0;
 		panel_9.add(lblNewLabel_8, gbc_lblNewLabel_8);
 		
-		comboBox = new JComboBox(Titula.values());
+		comboBox = new JComboBox<Titula>(Titula.values());
+		if(i==1)
+			comboBox.setSelectedItem(profesor.getTitula());
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -397,7 +430,9 @@ public class DodavanjeProfesoraDialog extends JDialog {
 		gbc_lblNewLabel_9.gridy = 0;
 		panel_10.add(lblNewLabel_9, gbc_lblNewLabel_9);
 		
-		comboBox_1 = new JComboBox(Zvanje.values());
+		comboBox_1 = new JComboBox<Zvanje>(Zvanje.values());
+		if(i==1)
+			comboBox.setSelectedItem(profesor.getZvanje());
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
 		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
@@ -493,7 +528,7 @@ public class DodavanjeProfesoraDialog extends JDialog {
 			public void mouseClicked(MouseEvent e) {
 				Date datumRodjenja = new Date();
 				try {
-					datumRodjenja = new SimpleDateFormat("dd/MM/yyyy").parse(textField_2.getText());
+					datumRodjenja = sdf.parse(textField_2.getText());
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(new JFrame(), "Unesite u obliku (dd/mm/yyyy)", "Pogresno unet datum!", JOptionPane.ERROR_MESSAGE);
@@ -501,15 +536,15 @@ public class DodavanjeProfesoraDialog extends JDialog {
 				} 
 				String titula = comboBox.getSelectedItem().toString();
 				Titula titula1 = Titula.valueOf(titula);
-				
 				String zvanje = comboBox_1.getSelectedItem().toString();
 				Zvanje zvanje1 = Zvanje.valueOf(zvanje);
-				
-				ProfesoriController.getInstance().dodajProfesora(textField.getText(), textField_1.getText(), datumRodjenja, textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText(), Integer.parseInt(textField_7.getText()), titula1, zvanje1, new ArrayList<Predmet>());
-				
-				for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
-					System.out.println(p.toString());
-				}
+				if(i==0)
+					ProfesoriController.getInstance().dodajProfesora(textField.getText(), textField_1.getText(), datumRodjenja, textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText(), Integer.parseInt(textField_7.getText()), titula1, zvanje1, new ArrayList<Predmet>());
+				else
+					ProfesoriController.getInstance().izmeniProfesora(textField.getText(), textField_1.getText(), datumRodjenja, textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText(), Integer.parseInt(textField_7.getText()), titula1, zvanje1, profesor.getPredmeti());
+				//for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
+				//	System.out.println(p.toString());
+				//}
 				
 				
 				dispose();

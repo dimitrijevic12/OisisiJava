@@ -81,7 +81,7 @@ import model.Student;
 					}
 					else if(tab==1)
 					{
-						DodavanjeProfesoraDialog d = new DodavanjeProfesoraDialog();
+						DodavanjeProfesoraDialog d = new DodavanjeProfesoraDialog(0,null);
 					    d.setVisible(true);
 					}
 					else
@@ -120,8 +120,18 @@ import model.Student;
 					}
 					else if(tab==1)
 						{
-							DodavanjeProfesoraDialog d = new DodavanjeProfesoraDialog();
-						    d.setVisible(true);
+						if(!ProfesoriTable.getInstance().getSelectionModel().isSelectionEmpty()) {
+							int rowIndex = ProfesoriTable.getInstance().convertRowIndexToModel(ProfesoriTable.getInstance().getSelectedRow());
+							Profesor profesor = BazaProfesora.getInstance().getRow(rowIndex);
+							
+							
+							DodavanjeProfesoraDialog d=new DodavanjeProfesoraDialog(1,profesor);
+							d.setVisible(true);
+						}
+							else
+							{
+								JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati profesora kog zelite da izmenite ", "Profesor nije izabran!", JOptionPane.ERROR_MESSAGE);
+							}
 						}
 					else
 						{
