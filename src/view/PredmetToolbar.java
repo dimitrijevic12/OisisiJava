@@ -91,29 +91,33 @@ public class PredmetToolbar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
-				System.out.println("Selected row: " + rowIndex);
-				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
-				
-				if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete predmet", "Brisanje predmeta", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					PredmetiController.getInstance().brisanjePredmetaIzTabele(predmet);
-				}else return;
-				
+				if(!PredmetiTable.getInstance().getSelectionModel().isSelectionEmpty()) {
+					int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
+					System.out.println("Selected row: " + rowIndex);
+					Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
+					
+					if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete predmet", "Brisanje predmeta", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+						PredmetiController.getInstance().brisanjePredmetaIzTabele(predmet);
+					}else return;
+				}else {
+					JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati predmet koji želite da obrišete ", "Greška!", JOptionPane.ERROR_MESSAGE);
+				}
+					
 			}
 		});
 		addProfesorUPredmetBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
-				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
-				
-				DodavanjeProfesoraNaPredmet dialog = new DodavanjeProfesoraNaPredmet();
-				dialog.setVisible(true);
-				
-//				String brLicneKarte = JOptionPane.showInputDialog(new JFrame(), "Unesite broj licne karte profesora", "Dodavanje profesora", JOptionPane.PLAIN_MESSAGE);
-				
-//				PredmetiController.getInstance().dodavanjeProfesoraNaPredmet(predmet, brLicneKarte);
+				if(!PredmetiTable.getInstance().getSelectionModel().isSelectionEmpty()) {	
+					int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
+					Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
+					
+					DodavanjeProfesoraNaPredmet dialog = new DodavanjeProfesoraNaPredmet();
+					dialog.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati predmet u koji želite da upišete profesora", "Greška!", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
@@ -121,12 +125,15 @@ public class PredmetToolbar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
-				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
-				
-				IzmenaPredmetaDijalog dialog = new IzmenaPredmetaDijalog(predmet);
-				dialog.setVisible(true);
-				
+				if(!PredmetiTable.getInstance().getSelectionModel().isSelectionEmpty()) {
+					int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
+					Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
+					
+					IzmenaPredmetaDijalog dialog = new IzmenaPredmetaDijalog(predmet);
+					dialog.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati predmet koji želite da izmenite", "Greška!", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
@@ -134,11 +141,17 @@ public class PredmetToolbar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
-				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
-				if(!predmet.getProfesor().getIme().equals("")) {
-					if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete profesora", "", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)		
-						PredmetiController.getInstance().brisanjeProfesoraSaPredmeta(rowIndex);
+				if(!PredmetiTable.getInstance().getSelectionModel().isSelectionEmpty()) {
+					int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
+					Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
+					if(predmet.getProfesor() != null) {
+						if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete profesora", "", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)		
+							PredmetiController.getInstance().brisanjeProfesoraSaPredmeta(rowIndex);
+					}else {
+						JOptionPane.showMessageDialog(new JFrame(), "Predmet nema profesora", "Greška!", JOptionPane.ERROR_MESSAGE);
+					}
+				}else {
+					JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati predmet iz kojeg želite da obrišete profesora", "Greška!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

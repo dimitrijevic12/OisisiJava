@@ -77,11 +77,15 @@ public class ProfesorToolbar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int rowIndex = ProfesoriTable.getInstance().convertRowIndexToModel(ProfesoriTable.getInstance().getSelectedRow());
-				Profesor profesor = BazaProfesora.getInstance().getRow(rowIndex);
-				if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete profesora", "Brisanje profesora", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-					ProfesoriController.getInstance().obrisiProfesora(profesor.getBrLicne());
-				}else return;
+				if(!ProfesoriTable.getInstance().getSelectionModel().isSelectionEmpty()) {	
+					int rowIndex = ProfesoriTable.getInstance().convertRowIndexToModel(ProfesoriTable.getInstance().getSelectedRow());
+					Profesor profesor = BazaProfesora.getInstance().getRow(rowIndex);
+					if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete profesora", "Brisanje profesora", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+						ProfesoriController.getInstance().obrisiProfesora(profesor.getBrLicne());
+					}else return;
+				}else {
+					JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati profesora koga želite da izbrišete", "Profesor nije izabran!", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		editProfesorBtn.addActionListener(new ActionListener() {
