@@ -47,8 +47,7 @@ public class BazaPredmeta implements Serializable{
 	
 	public void initPredmete() {
 		this.predmeti = new ArrayList<Predmet>();
-
-		predmeti.add(new Predmet("E123", "Analiza", Semestar.PRVI, GodinaStudija.PRVA, new Profesor("Pera", "Peric", new Date(), "Micurinova 37", "333-222", "nekiTamo@gmail.com", "Radnicka", "123456", Titula.ASISTENT, Zvanje.DR, new ArrayList<Predmet>()), new ArrayList<Student>()));
+		predmeti.add(new Predmet("E123", "Analiza", Semestar.PRVI, GodinaStudija.PRVA, new Profesor(BazaProfesora.getInstance().getProfesori().get(0)), new ArrayList<Student>()));
 		predmeti.add(new Predmet("E222", "Verovatnoca", Semestar.ČETVRTI, GodinaStudija.DRUGA, new Profesor(), new ArrayList<Student>()));
 		predmeti.add(new Predmet("R4345", "SIMS", Semestar.ŠESTI, GodinaStudija.TREĆA, new Profesor(), new ArrayList<Student>()));
 		
@@ -106,16 +105,33 @@ public class BazaPredmeta implements Serializable{
 	}
 
 	public void izbrisiPredmet(Predmet p) {
-		p.getProfesor().getPredmeti().remove(p);
+		Profesor prof = p.getProfesor();
+		for(Profesor profesor : BazaProfesora.getInstance().getProfesori()) {
+			if(profesor.getBrLicne().equals(prof.getBrLicne())) {
+				profesor.izbrisiPredmet(p.getSifra());
+			}
+		}
 		predmeti.remove(p);
 		System.out.println(BazaProfesora.getInstance());
 	}
 
 	public void izmeniPredmet(Predmet predmet, String sifra, String naziv, Semestar semestar, GodinaStudija godina) {
+		for(Profesor profesor : BazaProfesora.getInstance().getProfesori()) {
+			for(Predmet p : profesor.getPredmeti()) {
+				if(p.getSifra().equals(predmet.getSifra())) {
+					p.setSifra(sifra);
+					p.setNaziv(naziv);
+					p.setSemestar(semestar);
+					p.setGodina(godina);
+					break;
+				}
+			}
+		}
 		predmet.setSifra(sifra);
 		predmet.setNaziv(naziv);
 		predmet.setSemestar(semestar);
 		predmet.setGodina(godina);
+		
 	}
 	
 	public void dodajProfesoraNaPredmet(int indeks, String brLicneKarte) {

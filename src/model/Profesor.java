@@ -30,8 +30,8 @@ public class Profesor implements Serializable{
 		this.email = "";
 		this.adresaKancelarije = "";
 		this.brLicne = "";
-		this.titula = Titula.ASISTENT;
-		this.zvanje = Zvanje.DR;
+		this.titula = Titula.PROF;
+		this.zvanje = Zvanje.DOCENT;
 		this.predmeti = new ArrayList<Predmet>();
 	}
 	
@@ -50,6 +50,20 @@ public class Profesor implements Serializable{
 		this.titula = titula;
 		this.zvanje = zvanje;
 		this.predmeti = predmeti;
+	}
+	public Profesor(Profesor p) {
+		super();
+		this.ime = p.ime;
+		this.prezime = p.prezime;
+		this.datumRodjenja = p.datumRodjenja;
+		this.adresaStanovanja = p.adresaStanovanja;
+		this.telefon = p.telefon;
+		this.email = p.email;
+		this.adresaKancelarije = p.adresaKancelarije;
+		this.brLicne = p.brLicne;
+		this.titula = p.titula;
+		this.zvanje = p.zvanje;
+		this.predmeti = p.predmeti;
 	}
 	public String getIme() {
 		return ime;

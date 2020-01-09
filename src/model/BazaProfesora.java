@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import controllers.ProfesoriController;
 
@@ -48,17 +49,18 @@ public class BazaProfesora implements Serializable {
 	}
 	
 	private void initProfesore() {
+		System.out.println("Init profesore");
 		this.profesori = new ArrayList<Profesor>();
-		Date datum = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 		try {
-			profesori.add(new Profesor("Aleksa", "Petković", datum = sdf.parse("15.01.1965"), "Temerinska 15, Novi Sad", "021/334-990", "aleksa.petkovic@mailinator.com", "Dositeja Obradovića 6, Novi Sad, MI 105", "007198721", Titula.ASISTENT, Zvanje.DR, new ArrayList<Predmet>()));
+			ArrayList<Predmet> predmeti1 = new ArrayList<Predmet>();
+//			predmeti1.add(new pred)
+			profesori.add(new Profesor("Aleksa", "Petković", sdf.parse("15.01.1965"), "Temerinska 15, Novi Sad", "021/334-990", "aleksa.petkovic@mailinator.com", "Dositeja Obradovića 6, Novi Sad, MI 105", "007198721", Titula.PROF, Zvanje.REDOVNI, new ArrayList<Predmet>()));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		profesori.add(new Profesor("Marko", "Markovic", Calendar.getInstance().getTime(), "Micurinova 137", "3331413-222", "nekiTamo2@gmail.com", "Radnicka 12", "4241421", Titula.DOCENT, Zvanje.DR, new ArrayList<Predmet>()));
-		profesori.add(new Profesor("Petar", "Petrovic", Calendar.getInstance().getTime(), "Micurinova 2314237", "33344-22222", "nekiTamo3@gmail.com", "Radnicka 18", "1234321456", Titula.ASISTENT, Zvanje.MR, new ArrayList<Predmet>()));
+		profesori.add(new Profesor("Marko", "Markovic", Calendar.getInstance().getTime(), "Micurinova 137", "3331413-222", "nekiTamo2@gmail.com", "Radnicka 12", "4241421", Titula.DR, Zvanje.DOCENT, new ArrayList<Predmet>()));
+		profesori.add(new Profesor("Petar", "Petrovic", Calendar.getInstance().getTime(), "Micurinova 2314237", "33344-22222", "nekiTamo3@gmail.com", "Radnicka 18", "1234321456", Titula.PROF, Zvanje.VANREDNI, new ArrayList<Predmet>()));
 	}
 
 	public ArrayList<Profesor> getProfesori() {
@@ -97,8 +99,8 @@ public class BazaProfesora implements Serializable {
 		case 5: return profesor.getTelefon();
 		case 6: return profesor.getEmail();
 		case 7: return profesor.getAdresaKancelarije();
-		case 8: return profesor.getTitula().toString();
-		case 9: return profesor.getZvanje().toString();
+		case 8: return profesor.getTitula().displayName();
+		case 9: return profesor.getZvanje().displayName();
 		default: return null;
 		}
 	}
@@ -108,25 +110,14 @@ public class BazaProfesora implements Serializable {
 			ArrayList<Predmet> predmeti) {
 		this.profesori.add(new Profesor(ime, prezime, datumRodjenja, adresaStanovanja, telefon, email, adresaKancelarije, brLicne, titula, zvanje, predmeti));
 	}
-	
-	
-	
+
 	public void izbrisiProfesora(String brLicneKarte) {
-		for (Profesor p : profesori) {
-			if (p.getBrLicne().equals(brLicneKarte)) {
-				int i = -1;
-				for(Predmet predmet : BazaPredmeta.getInstance().getPredmeti()) {
-					i++;
-					for(Predmet pr : p.getPredmeti()) {
-						if(pr.getSifra().equals(predmet.getSifra())) {
-							BazaPredmeta.getInstance().getPredmeti().get(i).setProfesor(null);
-						}
-					}
-				}
-				profesori.remove(p);
-				break;
+		for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+			if(p.getProfesor().getBrLicne().equals(brLicneKarte)) {
+				p.setProfesor(null);
 			}
 		}
+		profesori.remove(nadjiPoId(brLicneKarte));
 	}
 	
 	public void izmeniProfesora(String ime, String prezime, Date datumRodjenja, String adresaStanovanja, String telefon,
@@ -184,15 +175,13 @@ public class BazaProfesora implements Serializable {
 		}
 	}
 	
-	public int nadjiPoId(String brLicne) {
-		int i = -1;
+	public Profesor nadjiPoId(String brLicne) {
 		for(Profesor p : profesori) {
-			i++;
 			if(p.getBrLicne().equals(brLicne)) {
-				return i;
+				return p;
 			}
 		}
-		return 0;
+		return null;
 	}
 	
 	
