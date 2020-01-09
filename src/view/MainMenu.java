@@ -180,7 +180,7 @@ import model.Student;
 								String poruka ="Da li ste sigurni da želite da obrišete "+profesor.getIme()+" "+profesor.getPrezime()+" ?";
 								
 								if(JOptionPane.showConfirmDialog(null, poruka, "Brisanje profesora", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-									ProfesoriController.getInstance().obrisiProfesora(profesor.getBrLicne());
+//									ProfesoriController.getInstance().obrisiProfesora(profesor.getBrLicne());
 								}else return;
 							}
 						else

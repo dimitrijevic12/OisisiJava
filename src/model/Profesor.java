@@ -16,7 +16,7 @@ public class Profesor implements Serializable{
 	private String telefon;
 	private String email;
 	private String adresaKancelarije;
-	private int brLicne;
+	private String brLicne;
 	private Titula titula;
 	private Zvanje zvanje;
 	private ArrayList<Predmet> predmeti;
@@ -29,14 +29,14 @@ public class Profesor implements Serializable{
 		this.telefon = "";
 		this.email = "";
 		this.adresaKancelarije = "";
-		this.brLicne = 0;
+		this.brLicne = "";
 		this.titula = Titula.ASISTENT;
 		this.zvanje = Zvanje.DR;
 		this.predmeti = new ArrayList<Predmet>();
 	}
 	
 	public Profesor(String ime, String prezime, Date datumRodjenja, String adresaStanovanja, String telefon,
-			String email, String adresaKancelarije, int brLicne, Titula titula, Zvanje zvanje,
+			String email, String adresaKancelarije, String brLicne, Titula titula, Zvanje zvanje,
 			ArrayList<Predmet> predmeti) {
 		super();
 		this.ime = ime;
@@ -72,7 +72,7 @@ public class Profesor implements Serializable{
 	public String getAdresaKancelarije() {
 		return adresaKancelarije;
 	}
-	public int getBrLicne() {
+	public String getBrLicne() {
 		return brLicne;
 	}
 	public Titula getTitula() {
@@ -105,7 +105,7 @@ public class Profesor implements Serializable{
 	public void setAdresaKancelarije(String adresaKancelarije) {
 		this.adresaKancelarije = adresaKancelarije;
 	}
-	public void setBrLicne(int brLicne) {
+	public void setBrLicne(String brLicne) {
 		this.brLicne = brLicne;
 	}
 	public void setTitula(Titula titula) {
@@ -123,5 +123,14 @@ public class Profesor implements Serializable{
 				+ ", adresaStanovanja=" + adresaStanovanja + ", telefon=" + telefon + ", email=" + email
 				+ ", adresaKancelarije=" + adresaKancelarije + ", brLicne=" + brLicne + ", titula=" + titula
 				+ ", zvanje=" + zvanje + ", predmeti=" + predmeti + "]";
+	}
+	
+	public void izbrisiPredmet(String sifra) {
+		for(Predmet p : predmeti) {
+			if(p.getSifra().equals(sifra)) {
+				predmeti.remove(p);
+				break;
+			}
+		}
 	}
 }

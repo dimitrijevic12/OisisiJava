@@ -138,7 +138,7 @@ public class PredmetToolbar extends JToolBar {
 				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
 				if(!predmet.getProfesor().getIme().equals("")) {
 					if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete profesora", "", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)		
-						PredmetiController.getInstance().brisanjeProfesoraSaPredmeta(predmet);
+						PredmetiController.getInstance().brisanjeProfesoraSaPredmeta(rowIndex);
 				}
 			}
 		});

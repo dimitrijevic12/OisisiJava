@@ -44,8 +44,8 @@ public class PredmetiController {
 		model.fireTableDataChanged();
 	}
 	
-	public void dodavanjeProfesoraNaPredmet(Predmet predmet, String brLicneKarte) {
-		BazaPredmeta.getInstance().dodajProfesoraNaPredmet(predmet, brLicneKarte);
+	public void dodavanjeProfesoraNaPredmet(int indeks, String brLicneKarte) {
+		BazaPredmeta.getInstance().dodajProfesoraNaPredmet(indeks, brLicneKarte);
 		System.out.println(BazaProfesora.getInstance());
 		
 		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti) PredmetiTable.getInstance().getModel();
@@ -61,8 +61,8 @@ public class PredmetiController {
 		model.fireTableDataChanged();
 	}
 	
-	public void brisanjeProfesoraSaPredmeta(Predmet predmet) {
-		BazaPredmeta.getInstance().brisanjeProfesoraSaPredmeta(predmet);
+	public void brisanjeProfesoraSaPredmeta(int index) {
+		BazaPredmeta.getInstance().brisanjeProfesoraSaPredmeta(index);
 		
 		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti) PredmetiTable.getInstance().getModel();
 		

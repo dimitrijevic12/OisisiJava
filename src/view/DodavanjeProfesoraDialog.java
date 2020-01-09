@@ -361,7 +361,7 @@ public class DodavanjeProfesoraDialog extends JDialog {
 			textField_7 = new JTextField();
 		else 
 			{
-			textField_7 = new JTextField(((Integer)profesor.getBrLicne()).toString());
+			textField_7 = new JTextField(profesor.getBrLicne());
 			textField_7.setEditable(false);
 			}
 		textField_7.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -539,9 +539,9 @@ public class DodavanjeProfesoraDialog extends JDialog {
 				String zvanje = comboBox_1.getSelectedItem().toString();
 				Zvanje zvanje1 = Zvanje.valueOf(zvanje);
 				if(i==0)
-					ProfesoriController.getInstance().dodajProfesora(textField.getText(), textField_1.getText(), datumRodjenja, textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText(), Integer.parseInt(textField_7.getText()), titula1, zvanje1, new ArrayList<Predmet>());
+					ProfesoriController.getInstance().dodajProfesora(textField.getText(), textField_1.getText(), datumRodjenja, textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText(), textField_7.getText(), titula1, zvanje1, new ArrayList<Predmet>());
 				else
-					ProfesoriController.getInstance().izmeniProfesora(textField.getText(), textField_1.getText(), datumRodjenja, textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText(), Integer.parseInt(textField_7.getText()), titula1, zvanje1, profesor.getPredmeti());
+					ProfesoriController.getInstance().izmeniProfesora(textField.getText(), textField_1.getText(), datumRodjenja, textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText(), textField_7.getText(), titula1, zvanje1, profesor.getPredmeti());
 				//for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
 				//	System.out.println(p.toString());
 				//}

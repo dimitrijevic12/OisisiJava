@@ -82,5 +82,4 @@ public class Predmet implements Serializable{
 				+ ", studenti=" + studenti + "]";
 	}
 	
-	
 }

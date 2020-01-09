@@ -105,9 +105,9 @@ public class DodavanjeProfesoraNaPredmet extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
-				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
+//				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
 				
-				PredmetiController.getInstance().dodavanjeProfesoraNaPredmet(predmet, brLicneTextField.getText());
+				PredmetiController.getInstance().dodavanjeProfesoraNaPredmet(rowIndex, brLicneTextField.getText());
 				dispose();
 			}
 		});
