@@ -106,9 +106,11 @@ public class BazaPredmeta implements Serializable{
 
 	public void izbrisiPredmet(Predmet p) {
 		Profesor prof = p.getProfesor();
-		for(Profesor profesor : BazaProfesora.getInstance().getProfesori()) {
-			if(profesor.getBrLicne().equals(prof.getBrLicne())) {
-				profesor.izbrisiPredmet(p.getSifra());
+		if(prof != null) {
+			for(Profesor profesor : BazaProfesora.getInstance().getProfesori()) {
+				if(profesor.getBrLicne().equals(prof.getBrLicne())) {
+					profesor.izbrisiPredmet(p.getSifra());
+				}
 			}
 		}
 		predmeti.remove(p);

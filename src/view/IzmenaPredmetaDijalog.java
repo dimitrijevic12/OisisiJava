@@ -189,12 +189,7 @@ public class IzmenaPredmetaDijalog extends JDialog{
 			String godina = godinaComboBox.getSelectedItem().toString();
 			GodinaStudija godina1 = GodinaStudija.valueOf(godina);
 			
-			for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
-				if(sifraTextField.getText().equals(p.getSifra())) {
-					JOptionPane.showMessageDialog(null, "Već postoji predmet sa šifrom: " + sifraTextField.getText(), "Greška!", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-			}
+			
 			
 			PredmetiController.getInstance().izmenaPredmetaIzTabele(p, sifraTextField.getText(), nazivTextField.getText(), semestar1, godina1);
 			

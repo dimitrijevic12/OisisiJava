@@ -112,9 +112,12 @@ public class BazaProfesora implements Serializable {
 	}
 
 	public void izbrisiProfesora(String brLicneKarte) {
-		for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
-			if(p.getProfesor().getBrLicne().equals(brLicneKarte)) {
-				p.setProfesor(null);
+		Profesor profesor = nadjiPoId(brLicneKarte);
+		if(profesor.getPredmeti().size() > 0) {
+			for(Predmet p : BazaPredmeta.getInstance().getPredmeti()) {
+				if(p.getProfesor().getBrLicne().equals(brLicneKarte)) {
+					p.setProfesor(null);
+				}
 			}
 		}
 		profesori.remove(nadjiPoId(brLicneKarte));
