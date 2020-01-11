@@ -42,7 +42,7 @@ public class BazaStudent  {
 		
 		sdf=new SimpleDateFormat("dd/MM/yyyy");
 		
-		studentStart();
+		initStudente();
 		
 		this.kolone = new ArrayList<String>();
 		this.kolone.add("Indeks");
@@ -54,7 +54,7 @@ public class BazaStudent  {
 
 	}
 	
-	private void studentStart() {
+	private void initStudente() {
 		this.studenti = new ArrayList<Student>();
 		try {
 			studenti.add(new Student("Sasa", "Dotlic", sdf.parse("15/07/1998"), "Promajska 5", "0621234567", "sd98@gmail.com", "PR152/2017",sdf.parse("15/09/2017"),GodinaStudija.TREĆA,Status.B,8.25));

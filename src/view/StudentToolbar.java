@@ -80,16 +80,22 @@ public class StudentToolbar extends JToolBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-			if(!StudentiTable.getInstance().getSelectionModel().isSelectionEmpty()) {
+			if(StudentiTable.getInstance().getSelectionModel().getSelectedItemsCount()==1) {
 				int rowIndex = StudentiTable.getInstance().convertRowIndexToModel(StudentiTable.getInstance().getSelectedRow());
 				Student student = BazaStudent.getInstance().getRow(rowIndex);
+				
+				System.out.println(StudentiTable.getInstance().getSelectionModel().getSelectedItemsCount());
 				
 				DodavanjeStudentaDijalog d=new DodavanjeStudentaDijalog(1,student);
 				d.setVisible(true);
 			}
-				else
+			else if(StudentiTable.getInstance().getRowCount()==0)
+			{
+				JOptionPane.showMessageDialog(new JFrame(), "Nema studenata za izmenu.", "Tabela je prazna", JOptionPane.ERROR_MESSAGE);
+			}
+			else
 				{
-					JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati studenta kog zelite da izmenite ", "Student nije izabran!", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati studenta kog zelite da izmenite .\n Moguca je samo pojedinacna izmena", "Student nije izabran!", JOptionPane.ERROR_MESSAGE);
 				}
 				}
 			});
@@ -99,7 +105,7 @@ public class StudentToolbar extends JToolBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(!StudentiTable.getInstance().getSelectionModel().isSelectionEmpty()) {
+				if(StudentiTable.getInstance().getSelectionModel().getSelectedItemsCount()==1) {
 					int rowIndex = StudentiTable.getInstance().convertRowIndexToModel(StudentiTable.getInstance().getSelectedRow());
 						Student student = BazaStudent.getInstance().getRow(rowIndex);
 				
@@ -107,11 +113,15 @@ public class StudentToolbar extends JToolBar {
 				
 								if(JOptionPane.showConfirmDialog(null, poruka, "Brisanje predmeta", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 									StudentiController.getInstance().brisanjeStudenta(student);
-				}else return;
+								}else return;
+				}
+				else if(StudentiTable.getInstance().getRowCount()==0)
+				{
+					JOptionPane.showMessageDialog(new JFrame(), "Nema studenata za brisanje.", "Tabela je prazna", JOptionPane.ERROR_MESSAGE);
 				}
 				else
 				{
-					JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati studenta kog zelite da obrisete ", "Student nije izabran!", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati studenta kog zelite da obrisete .\n Moguce je samo pojedinacno brisanje", "Student nije izabran!", JOptionPane.ERROR_MESSAGE);
 				}
 					
 				

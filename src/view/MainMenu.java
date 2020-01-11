@@ -106,21 +106,25 @@ import model.Student;
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					if(tab==0){
-						if(!StudentiTable.getInstance().getSelectionModel().isSelectionEmpty()) {
+						if(StudentiTable.getInstance().getSelectionModel().getSelectedItemsCount()==1) {
 							int rowIndex = StudentiTable.getInstance().convertRowIndexToModel(StudentiTable.getInstance().getSelectedRow());
 							Student student = BazaStudent.getInstance().getRow(rowIndex);
 							
 							DodavanjeStudentaDijalog d=new DodavanjeStudentaDijalog(1,student);
 							d.setVisible(true);
 						}
-							else
-							{
-								JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati studenta kog zelite da izmenite ", "Student nije izabran!", JOptionPane.ERROR_MESSAGE);
+						else if(StudentiTable.getInstance().getRowCount()==0)
+						{
+							JOptionPane.showMessageDialog(new JFrame(), "Nema studenata za izmenu.", "Tabela je prazna", JOptionPane.ERROR_MESSAGE);
+						}
+						else
+						{
+								JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati studenta kog zelite da izmenite. \n Moguca je samo pojedinacna izmena ", "Student nije izabran!", JOptionPane.ERROR_MESSAGE);
 							}
 					}
 					else if(tab==1)
 						{
-						if(!ProfesoriTable.getInstance().getSelectionModel().isSelectionEmpty()) {
+						if(ProfesoriTable.getInstance().getSelectionModel().getSelectedItemsCount()==1) {
 							int rowIndex = ProfesoriTable.getInstance().convertRowIndexToModel(ProfesoriTable.getInstance().getSelectedRow());
 							Profesor profesor = BazaProfesora.getInstance().getRow(rowIndex);
 							
@@ -128,23 +132,34 @@ import model.Student;
 							DodavanjeProfesoraDialog d=new DodavanjeProfesoraDialog(1,profesor);
 							d.setVisible(true);
 						}
-							else
+						else if(ProfesoriTable.getInstance().getRowCount()==0)
+						{
+							JOptionPane.showMessageDialog(new JFrame(), "Nema profesora za izmenu.", "Tabela je prazna", JOptionPane.ERROR_MESSAGE);
+						}
+						else
 							{
-								JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati profesora kog zelite da izmenite ", "Profesor nije izabran!", JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati profesora kog zelite da izmenite .\n Moguca je samo pojedinacna izmena ", "Profesor nije izabran!", JOptionPane.ERROR_MESSAGE);
 							}
 						}
+					
+					
+					
 					else
 						{
-							if(!PredmetiTable.getInstance().getSelectionModel().isSelectionEmpty()) {
+							if(PredmetiTable.getInstance().getSelectionModel().getSelectedItemsCount()==1) {
 									int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
 									Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
 									
 									IzmenaPredmetaDijalog dialog = new IzmenaPredmetaDijalog(predmet);
 									dialog.setVisible(true);
 							}
+							else if(PredmetiTable.getInstance().getRowCount()==0)
+							{
+								JOptionPane.showMessageDialog(new JFrame(), "Nema predmeta za izmenu.", "Tabela je prazna", JOptionPane.ERROR_MESSAGE);
+							}
 							else
 							{
-								JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati predmet koji zelite da izmenite ", "Predmet nije izabran!", JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati predmet koji zelite da izmenite .\n Moguca je samo pojedinacna izmena", "Predmet nije izabran!", JOptionPane.ERROR_MESSAGE);
 							}
 						}
 					
@@ -156,42 +171,50 @@ import model.Student;
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					if(tab==0){
-						if(!StudentiTable.getInstance().getSelectionModel().isSelectionEmpty()) {
+						if(StudentiTable.getInstance().getSelectionModel().getSelectedItemsCount()==1) {
 							int rowIndex = StudentiTable.getInstance().convertRowIndexToModel(StudentiTable.getInstance().getSelectedRow());
 								Student student = BazaStudent.getInstance().getRow(rowIndex);
 						
 									String poruka ="Da li ste sigurni da želite da obrišete "+student.getIme()+" "+student.getPrezime()+" ?";
 						
-										if(JOptionPane.showConfirmDialog(null, poruka, "Brisanje predmeta", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) 
+										if(JOptionPane.showConfirmDialog(null, poruka, "Brisanje studenta", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) 
 												StudentiController.getInstance().brisanjeStudenta(student);
 										else return;
 						}
+						else if(StudentiTable.getInstance().getRowCount()==0)
+						{
+							JOptionPane.showMessageDialog(new JFrame(), "Nema studenata za brisanje.", "Tabela je prazna", JOptionPane.ERROR_MESSAGE);
+						}
 						else
 						{
-							JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati studenta kog zelite da obrisete ", "Student nije izabran!", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati studenta kog zelite da obrisete.\n Moguca je samo pojedinacno brisanje ", "Student nije izabran!", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 					else if(tab==1)
 					{
-						if(!ProfesoriTable.getInstance().getSelectionModel().isSelectionEmpty()) {
+						if(ProfesoriTable.getInstance().getSelectionModel().getSelectedItemsCount()==1) {
 								int rowIndex = ProfesoriTable.getInstance().convertRowIndexToModel(ProfesoriTable.getInstance().getSelectedRow());
 								Profesor profesor = BazaProfesora.getInstance().getRow(rowIndex);
 								
 								String poruka ="Da li ste sigurni da želite da obrišete "+profesor.getIme()+" "+profesor.getPrezime()+" ?";
 								
 								if(JOptionPane.showConfirmDialog(null, poruka, "Brisanje profesora", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-//									ProfesoriController.getInstance().obrisiProfesora(profesor.getBrLicne());
+									ProfesoriController.getInstance().obrisiProfesora(profesor.getBrLicne());
 								}else return;
 							}
+						else if(ProfesoriTable.getInstance().getRowCount()==0)
+						{
+							JOptionPane.showMessageDialog(new JFrame(), "Nema profesora za brisanje.", "Tabela je prazna", JOptionPane.ERROR_MESSAGE);
+						}
 						else
 						{
-							JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati profesora kog zelite da obrisete ", "Profesor nije izabran!", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati profesora kog zelite da obrisete .\\n Moguca je samo pojedinacno brisanje ", "Profesor nije izabran!", JOptionPane.ERROR_MESSAGE);
 						}
 						
 					}
 					else
 					{
-						if(!ProfesoriTable.getInstance().getSelectionModel().isSelectionEmpty()) {
+						if(ProfesoriTable.getInstance().getSelectionModel().getSelectedItemsCount()==1) {
 							int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
 							System.out.println("Selected row: " + rowIndex);
 							Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
@@ -201,6 +224,14 @@ import model.Student;
 							if(JOptionPane.showConfirmDialog(null, poruka, "Brisanje predmeta", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 								PredmetiController.getInstance().brisanjePredmetaIzTabele(predmet);
 							}else return;
+						}
+						else if(PredmetiTable.getInstance().getRowCount()==0)
+						{
+							JOptionPane.showMessageDialog(new JFrame(), "Nema predmeta za brisanje.", "Tabela je prazna", JOptionPane.ERROR_MESSAGE);
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati predmet koji zelite da obrisete .\n Moguca je samo pojedinacno brisanje ", "Profesor nije izabran!", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				}});

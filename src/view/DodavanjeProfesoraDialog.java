@@ -27,8 +27,10 @@ import javax.swing.SwingConstants;
 
 import controllers.ProfesoriController;
 import model.BazaProfesora;
+import model.BazaStudent;
 import model.Predmet;
 import model.Profesor;
+import model.Student;
 import model.Titula;
 import model.Zvanje;
 
@@ -526,34 +528,51 @@ public class DodavanjeProfesoraDialog extends JDialog {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Date datumRodjenja = new Date();
-				try {
-					datumRodjenja = sdf.parse(textField_2.getText());
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					JOptionPane.showMessageDialog(new JFrame(), "Unesite u obliku (dd/mm/yyyy)", "Pogresno unet datum!", JOptionPane.ERROR_MESSAGE);
-					e1.printStackTrace();
-				} 
-				String titula = comboBox.getSelectedItem().toString();
-				Titula titula1 = Titula.valueOf(titula);
-				String zvanje = comboBox_1.getSelectedItem().toString();
-				Zvanje zvanje1 = Zvanje.valueOf(zvanje);
-				if(i==0)
-					ProfesoriController.getInstance().dodajProfesora(textField.getText(), textField_1.getText(), datumRodjenja, textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText(), textField_7.getText(), titula1, zvanje1, new ArrayList<Predmet>());
-				else
-					ProfesoriController.getInstance().izmeniProfesora(textField.getText(), textField_1.getText(), datumRodjenja, textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText(), textField_7.getText(), titula1, zvanje1, profesor.getPredmeti());
-				//for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
-				//	System.out.println(p.toString());
-				//}
-				
-				
+				if(textField.getText().trim().isEmpty()||textField_1.getText().trim().isEmpty()||textField_2.getText().trim().isEmpty()||textField_3.getText().trim().isEmpty()||textField_4.getText().trim().isEmpty()||textField_5.getText().trim().isEmpty()||textField_6.getText().trim().isEmpty()||textField_7.getText().trim().isEmpty()) {
+						if(i==0)
+							for(Profesor p: BazaProfesora.getInstance().getProfesori()) {
+								if(textField_7.getText().trim().equals(p.getBrLicne() )) {
+									JOptionPane.showMessageDialog(null,"Već postoji profesor sa tim brojem licne karte", "Greška",JOptionPane.ERROR_MESSAGE);
+									return;
+								}
+							}
+						Date datumRodjenja = new Date();
+						try {
+							datumRodjenja = sdf.parse(textField_2.getText());
+						} catch (ParseException e1) {
+							// TODO Auto-generated catch block
+							JOptionPane.showMessageDialog(new JFrame(), "Unesite u obliku (dd/mm/yyyy)", "Pogresno unet datum!", JOptionPane.ERROR_MESSAGE);
+							e1.printStackTrace();
+							return;
+						} 
+						String titula = comboBox.getSelectedItem().toString();
+						Titula titula1 = Titula.valueOf(titula);
+						String zvanje = comboBox_1.getSelectedItem().toString();
+						Zvanje zvanje1 = Zvanje.valueOf(zvanje);
+						if(i==0)
+							ProfesoriController.getInstance().dodajProfesora(textField.getText(), textField_1.getText(), datumRodjenja, textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText(), textField_7.getText(), titula1, zvanje1, new ArrayList<Predmet>());
+						else
+							ProfesoriController.getInstance().izmeniProfesora(textField.getText(), textField_1.getText(), datumRodjenja, textField_3.getText(), textField_4.getText(), textField_5.getText(), textField_6.getText(), textField_7.getText(), titula1, zvanje1, profesor.getPredmeti());
+						
+						for(Profesor p : BazaProfesora.getInstance().getProfesori()) {
+							System.out.println(p.toString());
+						}
+						
+				}
 				dispose();
 				
 			}
 		});
-		
-		this.setName("Dodavanje profesora");
-		this.setTitle("Dodavanje profesora");
+		if(i==0)
+		{	
+			this.setName("Dodavanje profesora");
+			this.setTitle("Dodavanje profesora");
+		}
+		else
+		{
+				this.setName("Izmena profesora");
+				this.setTitle("Izmena profesora");
+		}
 		this.setModal(true);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);

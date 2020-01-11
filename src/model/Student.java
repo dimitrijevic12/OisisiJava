@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+import view.StudentiTable;
+
 public class Student implements Serializable{
 	/**
 	 * 
@@ -162,6 +164,8 @@ public class Student implements Serializable{
 		return predmeti.remove(predmet);
 		
 	}
+	
+	
 
 	@Override
 	public String toString() {

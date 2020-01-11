@@ -477,34 +477,50 @@ import model.Student;
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					// TODO Auto-generated method stubs
-			       if (!(tIme.getText().trim().isEmpty()||tPrezime.getText().trim().isEmpty() )) {
-					SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
-					Date datumRodjenja=null;
-					try {
-						datumRodjenja = sdf.parse(tDatum.getText());
-					} catch (ParseException e1) {
-						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(new JFrame(), "Unesite u obliku (dd/mm/yyyy)", "Pogresno unet datum!", JOptionPane.ERROR_MESSAGE);
-						e1.printStackTrace();
-					}
-					
-					Status status;
-					GodinaStudija godinaStudija=(GodinaStudija)cbGodina.getSelectedItem();
-					
-					if(rbBudzet.isSelected())
-						status=Status.B;
-					else
-						status=Status.S;
-					Student student;
-					student= new Student(tIme.getText(), tPrezime.getText(),datumRodjenja, tAdresa.getText(), tTelefon.getText(), "", tIndex.getText(),Calendar.getInstance().getTime(), godinaStudija,status, 0.00);
-					if(i==0)
-						StudentiController.getInstance().dodajStudenta(student);
+			       if (!(tIme.getText().trim().isEmpty()||tPrezime.getText().trim().isEmpty()||tDatum.getText().trim().isEmpty()||tAdresa.getText().trim().isEmpty()||tTelefon.getText().trim().isEmpty()||tIndex.getText().trim().isEmpty())) {
+						SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+						Date datumRodjenja=null;
+						if(i==0)
+								for(Student s: BazaStudent.getInstance().getStudenti()) {
+									if(tIndex.getText().toLowerCase().equals(s.getIndeks().toLowerCase() )) {
+										JOptionPane.showMessageDialog(null,"Već postoji student sa brojem indeksa " + tIndex.getText(), "Greška",JOptionPane.ERROR_MESSAGE);
+										return;
+									}
+								}
 						
-					else if(i==1)
-						StudentiController.getInstance().izmeniStudenta(student);
+						try {
+							datumRodjenja = sdf.parse(tDatum.getText());
+						} catch (ParseException e1) {
+							// TODO Auto-generated catch block
+							JOptionPane.showMessageDialog(new JFrame(), "Unesite u obliku (dd/mm/yyyy)", "Pogresno unet datum!", JOptionPane.ERROR_MESSAGE);
+							e1.printStackTrace();
+							return;
+						}
+						
+						Status status;
+						GodinaStudija godinaStudija=(GodinaStudija)cbGodina.getSelectedItem();
+						
+						if(rbBudzet.isSelected())
+							status=Status.B;
+						else
+							status=Status.S;
+						Student student;
+						student= new Student(tIme.getText(), tPrezime.getText(),datumRodjenja, tAdresa.getText(), tTelefon.getText(), "", tIndex.getText(),Calendar.getInstance().getTime(), godinaStudija,status, 0.00);
+						if(i==0)
+						{
+							StudentiController.getInstance().dodajStudenta(student);
+						}
+						else if(i==1)
+							StudentiController.getInstance().izmeniStudenta(student);
 				}
-				else {JOptionPane.showMessageDialog(new JFrame(), "Popunite sva obavezna polja", "Obavezna polja nisu popunjena!", JOptionPane.ERROR_MESSAGE);}
-				}});
+				else 
+				{
+					JOptionPane.showMessageDialog(new JFrame(), "Popunite sva obavezna polja", "Obavezna polja nisu popunjena!", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				dispose();
+				}
+				});
 			
 			
 			if(i==0) {

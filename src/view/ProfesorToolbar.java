@@ -77,15 +77,24 @@ public class ProfesorToolbar extends JToolBar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!ProfesoriTable.getInstance().getSelectionModel().isSelectionEmpty()) {	
+				if(ProfesoriTable.getInstance().getSelectionModel().getSelectedItemsCount()==1) {
 					int rowIndex = ProfesoriTable.getInstance().convertRowIndexToModel(ProfesoriTable.getInstance().getSelectedRow());
 					Profesor profesor = BazaProfesora.getInstance().getRow(rowIndex);
-					if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da želite da obrišete profesora", "Brisanje profesora", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					
+					String poruka ="Da li ste sigurni da želite da obrišete "+profesor.getIme()+" "+profesor.getPrezime()+" ?";
+					
+					if(JOptionPane.showConfirmDialog(null, poruka, "Brisanje profesora", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 						ProfesoriController.getInstance().obrisiProfesora(profesor.getBrLicne());
 					}else return;
-				}else {
-					JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati profesora koga želite da izbrišete", "Profesor nije izabran!", JOptionPane.ERROR_MESSAGE);
 				}
+			else if(ProfesoriTable.getInstance().getRowCount()==0)
+			{
+				JOptionPane.showMessageDialog(new JFrame(), "Nema profesora za brisanje.", "Tabela je prazna", JOptionPane.ERROR_MESSAGE);
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati profesora kog zelite da obrisete .\\n Moguca je samo pojedinacno brisanje ", "Profesor nije izabran!", JOptionPane.ERROR_MESSAGE);
+			}
 			}
 		});
 		editProfesorBtn.addActionListener(new ActionListener() {
@@ -93,7 +102,7 @@ public class ProfesorToolbar extends JToolBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(!ProfesoriTable.getInstance().getSelectionModel().isSelectionEmpty()) {
+				if(ProfesoriTable.getInstance().getSelectionModel().getSelectedItemsCount()==1) {
 					int rowIndex = ProfesoriTable.getInstance().convertRowIndexToModel(ProfesoriTable.getInstance().getSelectedRow());
 					Profesor profesor = BazaProfesora.getInstance().getRow(rowIndex);
 					
@@ -101,10 +110,15 @@ public class ProfesorToolbar extends JToolBar {
 					DodavanjeProfesoraDialog d=new DodavanjeProfesoraDialog(1,profesor);
 					d.setVisible(true);
 				}
-					else
+				else if(ProfesoriTable.getInstance().getRowCount()==0)
+				{
+					JOptionPane.showMessageDialog(new JFrame(), "Nema profesora za izmenu.", "Tabela je prazna", JOptionPane.ERROR_MESSAGE);
+				}
+				else
 					{
-						JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati profesora kog zelite da izmenite ", "Profesor nije izabran!", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati profesora kog zelite da izmenite .\n Moguca je samo pojedinacna izmena ", "Profesor nije izabran!", JOptionPane.ERROR_MESSAGE);
 					}
+				
 				}});
 		
 		searchProfesorBtn.addActionListener(new ActionListener() {
