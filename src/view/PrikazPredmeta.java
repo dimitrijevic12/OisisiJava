@@ -1,12 +1,14 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
+import javax.swing.JList;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
 import model.Predmet;
 import model.Profesor;
@@ -21,22 +23,30 @@ public class PrikazPredmeta extends JDialog {
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension d = new Dimension();
 		d = kit.getScreenSize();
-		d.setSize(d.width/3, d.height/3);
+		d.setSize(d.width/7, d.height/5);
 		setSize(d); 
 		
 		JScrollPane scroll = new JScrollPane();
-		this.add(scroll);
+		this.add(scroll, BorderLayout.CENTER);
 		
-		StringBuilder stringBuilder = new StringBuilder();
+		DefaultListModel<String> listData = new DefaultListModel<String>();
+		String string = new String();
 		
 		for(Predmet p : prof.getPredmeti()) {
-			stringBuilder.append(p.getSifra() + " | " + p.getNaziv() + "\n");
+			string = p.getSifra() + "  |  " + p.getNaziv();
+			listData.addElement(string);
 		}
 		
-		JTextArea textArea = new JTextArea(stringBuilder.toString());
-		textArea.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textArea.setEditable(false);
-		scroll.setViewportView(textArea);
+		JList<String> lista = new JList<String>();
+		
+		lista.setModel(listData);
+		lista.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		/*
+		 * JTextArea textArea = new JTextArea(stringBuilder.toString());
+		 * textArea.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		 * textArea.setEditable(false);
+		 */
+		scroll.setViewportView(lista);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
