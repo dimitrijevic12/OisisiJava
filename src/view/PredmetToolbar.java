@@ -16,7 +16,9 @@ import javax.swing.JToolBar;
 import controllers.PredmetiController;
 import controllers.ProfesoriController;
 import model.BazaPredmeta;
+import model.BazaStudent;
 import model.Predmet;
+import model.Student;
 
 public class PredmetToolbar extends JToolBar {
 	/**
@@ -165,6 +167,26 @@ public class PredmetToolbar extends JToolBar {
 				PredmetiTable.getInstance().search(query);
 			}
 		});
+		
+		addStudentUPredmetBtn.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(!PredmetiTable.getInstance().getSelectionModel().isSelectionEmpty()) {	
+					int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
+					Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
+					
+					DodavanjeStudentaNaPredmet dialog = new DodavanjeStudentaNaPredmet();
+					dialog.setVisible(true);
+				}
+				else if(ProfesoriTable.getInstance().getRowCount()==0)
+				{
+					JOptionPane.showMessageDialog(new JFrame(), "Tabela profesora je prazna.\n Molim prvo dodajte predmet.", "Greska!", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					JOptionPane.showMessageDialog(new JFrame(), "Potrebno je izabrati predmet u koji želite da upišete profesora", "Greška!", JOptionPane.ERROR_MESSAGE);
+				}
+			}});
 	}
 	
 }

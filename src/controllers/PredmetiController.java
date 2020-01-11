@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.BazaPredmeta;
 import model.BazaProfesora;
+import model.BazaStudent;
 import model.GodinaStudija;
 import model.Predmet;
 import model.Profesor;
@@ -52,6 +53,16 @@ public class PredmetiController {
 		
 		model.fireTableDataChanged();
 	}
+	
+	public void dodavanjeStudentaNaPredmet(String indeks) {
+		BazaPredmeta.getInstance().dodajStudentaNaPredmet(indeks);
+		System.out.println(BazaStudent.getInstance());
+		
+		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti) PredmetiTable.getInstance().getModel();
+		
+		model.fireTableDataChanged();
+	}
+	
 	
 	public void izmenaPredmetaIzTabele(Predmet predmet, String sifra, String naziv, Semestar semestar1, GodinaStudija godina1) {
 		BazaPredmeta.getInstance().izmeniPredmet(predmet, sifra, naziv, semestar1, godina1);

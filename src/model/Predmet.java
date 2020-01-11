@@ -75,6 +75,10 @@ public class Predmet implements Serializable{
 	public void setStudenti(ArrayList<Student> studenti) {
 		this.studenti = studenti;
 	}
+	
+	public void dodajStudenta(Student s) {
+		this.studenti.add(s);
+	}
 
 	@Override
 	public String toString() {

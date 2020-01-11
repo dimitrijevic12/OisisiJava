@@ -69,13 +69,14 @@ public class BazaStudent  {
 	public ArrayList<Student> getStudenti() {
 		return studenti;
 	}
-
+	
 	public int getColumnCount() {
 		return kolone.size();
 	}
 	public void setStudenti(ArrayList<Student> Studenti) {
 		this.studenti = studenti;
 	}
+	
 	
 	public String getColumnName(int index) {
 		return this.kolone.get(index);

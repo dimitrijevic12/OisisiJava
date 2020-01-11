@@ -32,6 +32,7 @@ public class BazaPredmeta implements Serializable{
 	
 	private ArrayList<String> kolone;
 	private ArrayList<Predmet> predmeti;
+	private ArrayList<Student> studenti;
 	
 	private BazaPredmeta() {
 		initPredmete();
@@ -134,6 +135,45 @@ public class BazaPredmeta implements Serializable{
 		predmet.setSemestar(semestar);
 		predmet.setGodina(godina);
 		
+	}
+	
+	public void dodajStudentaNaPredmet(String indeks) {
+		int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
+		Predmet predmet = BazaPredmeta.getInstance().getPredmeti().get(rowIndex);
+		
+		for(Student s: BazaStudent.getInstance().getStudenti()) {
+			if(indeks.toLowerCase().trim().equals(s.getIndeks().trim().toLowerCase() )) {
+				if(predmet.getGodina().equals(s.getGodinaStudija()) )
+				{
+					if(predmet.getStudenti().isEmpty())
+					{
+						predmet.dodajStudenta(s);
+						s.dodajPredmet(predmet);
+						return;
+					}
+					else {
+					for(Student student: predmet.getStudenti()) {
+						if(!indeks.toLowerCase().equals(student.getIndeks().toLowerCase()))
+							{	
+	
+								predmet.dodajStudenta(student);
+								student.dodajPredmet(predmet);
+								return;
+							}
+						else
+							{
+							JOptionPane.showMessageDialog(null,"Student je vec upisan na ovaj predmet ", "Greška",JOptionPane.ERROR_MESSAGE);
+							return;
+							}
+					}
+				}
+			}else 
+				JOptionPane.showMessageDialog(null,"Student nije odgovarajuca godina za izabrani predmet", "Greška",JOptionPane.ERROR_MESSAGE);
+				return;
+				
+				}
+		}
+		JOptionPane.showMessageDialog(null,"Ne postoji student sa unetim indeksom ", "Greška",JOptionPane.ERROR_MESSAGE);
 	}
 	
 	public void dodajProfesoraNaPredmet(int indeks, String brLicneKarte) {
