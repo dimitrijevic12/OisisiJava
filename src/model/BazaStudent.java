@@ -50,14 +50,6 @@ public class BazaStudent implements Serializable {
 	
 	private void initStudente() {
 		this.studenti = new ArrayList<Student>();
-		try {
-			studenti.add(new Student("Sasa", "Dotlic", sdf.parse("15/07/1998"), "Promajska 5", "0621234567", "sd98@gmail.com", "PR152/2017",sdf.parse("15/09/2017"),GodinaStudija.TREĆA,Status.B,8.25));
-			studenti.add(new Student("Ivan", "Rakic", sdf.parse("08/04/1999"), "Beogradska 10", "0641234567", "ir99@gmail.com", "IM15/2019",sdf.parse("01/09/2019"),GodinaStudija.PRVA,Status.S,7.20));
-			studenti.add(new Student("Zvezdana", "Zdravkovic", sdf.parse("24/11/1997"), "Branimira Cosica 14", "0641234567", "zz97@gmail.com", "HM14/2017",sdf.parse("10/09/2017"),GodinaStudija.DRUGA,Status.S,8.00));
-			studenti.add(new Student("Marina", "Latinovic", sdf.parse("28/10/1996"), "Urosa Predica 23", "0691234567", "ml96@gmail.com", "RA32/2016",sdf.parse("11/09/2016"),GodinaStudija.ČETVRTA,Status.B,8.93));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public ArrayList<Student> getStudenti() {
@@ -67,8 +59,8 @@ public class BazaStudent implements Serializable {
 	public int getColumnCount() {
 		return kolone.size();
 	}
-	public void setStudenti(ArrayList<Student> Studenti) {
-		this.studenti = Studenti;
+	public void setStudenti(ArrayList<Student> studenti) {
+		this.studenti = studenti;
 	}
 	
 	
@@ -111,6 +103,7 @@ public class BazaStudent implements Serializable {
 					student.setTelefon(s.getTelefon());
 					student.setDatumRodjenja(s.getDatumRodjenja());
 					student.setGodinaStudija(s.getGodinaStudija());
+					student.setStatus(s.getStatus());
 					iterator.set(student);
 					System.out.println(iterator.toString());
 				}
