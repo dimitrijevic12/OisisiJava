@@ -42,14 +42,14 @@ public class DodavanjeStudentaNaPredmet extends JDialog{
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension d = new Dimension();
 		d = kit.getScreenSize();
-		GridBagLayout gL = new GridBagLayout();
+		GridBagLayout gbl = new GridBagLayout();
 		
 		BorderLayout bL = new BorderLayout();
 		this.setLayout(bL);
 		
-//		BorderLayout bL1 = new BorderLayout();
+
 		panel = new JPanel();
-		panel.setLayout(gL);
+		panel.setLayout(gbl);
 		panel.setBackground(Color.WHITE);
 		
 		lIndeks = new JLabel("Indeks studenta *");
@@ -116,10 +116,12 @@ public class DodavanjeStudentaNaPredmet extends JDialog{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
+				
 					if(!tIndex.getText().trim().isEmpty())
 						PredmetiController.getInstance().dodavanjeStudentaNaPredmet(tIndex.getText());
 					else 
 						JOptionPane.showMessageDialog(new JFrame(), "Unesite broj indeksa", "Obavezna polja nisu popunjena!", JOptionPane.ERROR_MESSAGE);
+					
 					dispose();
 			}
 
@@ -149,7 +151,7 @@ public class DodavanjeStudentaNaPredmet extends JDialog{
 		 
 		this.setBackground(Color.WHITE);
 		this.setSize(d.width/5, d.height/5);
-		this.setTitle("Dodavanje studenta na predmet");
+		this.setTitle("Predmet- dodavanje studenta");
 		this.setLocationRelativeTo(null);
 		this.setModal(true);
 	}

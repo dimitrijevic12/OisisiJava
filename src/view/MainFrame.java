@@ -46,6 +46,7 @@ public class MainFrame extends JFrame {
 		tabbedPane.setFont(new Font("Arial", Font.PLAIN, 30));
 		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
+		
 		StudentToolbar studentToolbar = new StudentToolbar();
 		add(studentToolbar, BorderLayout.NORTH);
 		

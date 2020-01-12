@@ -202,6 +202,16 @@ public class BazaPredmeta implements Serializable{
 		}
 	}
 	
+	public void obrisiStudentaSaPredmeta(String indeks,Predmet predmet) {
+		for(Student student:predmet.getStudenti())
+			if(student.getIndeks().toLowerCase().trim().equals(indeks.trim().toLowerCase()))
+				{
+				predmet.ukloniStudenta(student);
+				student.ukloniPredmet(predmet);
+				return;
+				}
+	}
+	
 	public void brisanjeProfesoraSaPredmeta(int index) {
 		Predmet predmet = BazaPredmeta.getInstance().getPredmeti().get(index);
 		Profesor prof = BazaPredmeta.getInstance().getPredmeti().get(index).getProfesor();

@@ -29,6 +29,8 @@ public class PredmetiController {
 		
 	}
 	
+
+	
 	public void dodavanjePredmetaUTabelu(String sifra, String naziv, Semestar semestar1, GodinaStudija godina1) {
 		
 		BazaPredmeta.getInstance().dodajPredmet(sifra, naziv, semestar1, godina1, new Profesor(), new ArrayList<Student>());
@@ -63,6 +65,14 @@ public class PredmetiController {
 		model.fireTableDataChanged();
 	}
 	
+	public void brisanjeStudentaSaPredmeta(String indeks,Predmet predmet) {
+		BazaPredmeta.getInstance().obrisiStudentaSaPredmeta(indeks,predmet);
+		
+		AbstractTableModelPredmeti model = (AbstractTableModelPredmeti) PredmetiTable.getInstance().getModel();
+		
+		model.fireTableDataChanged();
+		
+	}
 	
 	public void izmenaPredmetaIzTabele(Predmet predmet, String sifra, String naziv, Semestar semestar1, GodinaStudija godina1) {
 		BazaPredmeta.getInstance().izmeniPredmet(predmet, sifra, naziv, semestar1, godina1);

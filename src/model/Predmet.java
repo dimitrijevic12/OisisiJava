@@ -79,6 +79,10 @@ public class Predmet implements Serializable{
 	public void dodajStudenta(Student s) {
 		this.studenti.add(s);
 	}
+	
+	public void ukloniStudenta(Student s) {
+		this.studenti.remove(s);
+	}
 
 	@Override
 	public String toString() {

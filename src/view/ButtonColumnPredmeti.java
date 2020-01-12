@@ -6,10 +6,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.AbstractCellEditor;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+
+import model.BazaPredmeta;
+import model.Predmet;
 
 public class ButtonColumnPredmeti extends AbstractCellEditor
 		implements TableCellEditor, TableCellRenderer {
@@ -35,7 +39,19 @@ public class ButtonColumnPredmeti extends AbstractCellEditor
 		this.editorButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(table, "Selektovan je igrac u redu: " + table.getSelectedRow());
+
+				int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
+				Predmet predmet = BazaPredmeta.getInstance().getPredmeti().get(rowIndex);
+				if(!predmet.getStudenti().isEmpty())
+				{	
+					PrikazStudenata ps=new PrikazStudenata(predmet);
+					ps.setVisible(true);
+				}
+				else {
+					JOptionPane.showMessageDialog(new JFrame(), "Za izabrani predmet nema studenata","", JOptionPane.INFORMATION_MESSAGE);
+				}
+
+
 			}
 		});
 		
