@@ -45,6 +45,7 @@ public class ProfesoriController {
 	public void dodajProfesora(String ime, String prezime, Date datumRodjenja, String adresaStanovanja, String telefon,
 			String email, String adresaKancelarije, String brLicne, Titula titula, Zvanje zvanje,
 			ArrayList<Predmet> predmeti){
+		System.out.println("Dodavanje Profesora");
 		BazaProfesora.getInstance().dodajProfesora(ime, prezime, datumRodjenja, adresaStanovanja, telefon, email, adresaKancelarije, brLicne, titula, zvanje, predmeti);
 		
 		AbstractTableModelProfesor model = (AbstractTableModelProfesor) ProfesoriTable.getInstance().getModel();
