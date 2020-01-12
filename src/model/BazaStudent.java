@@ -41,6 +41,7 @@ public class BazaStudent implements Serializable {
 		this.kolone.add("Indeks");
 		this.kolone.add("Ime");
 		this.kolone.add("Prezime");
+		this.kolone.add("Datum rodjenja");
 		this.kolone.add("Godina studija");
 		this.kolone.add("Status");
 		this.kolone.add("Prosek");
@@ -85,9 +86,10 @@ public class BazaStudent implements Serializable {
 		case 0: return student.getIndeks();
 		case 1: return student.getIme();
 		case 2: return student.getPrezime();
-		case 3: return student.getGodinaStudija().toString();
-		case 4: return student.getStatus().toString();
-		case 5: return student.getProsek().toString();
+		case 3: return sdf.format(student.getDatumRodjenja());
+		case 4: return student.getGodinaStudija().toString();
+		case 5: return student.getStatus().toString();
+		case 6: return student.getProsek().toString();
 		default: return null;
 		}
 	}
@@ -107,9 +109,8 @@ public class BazaStudent implements Serializable {
 					student.setAdresaStanovanja(s.getAdresaStanovanja());
 					student.setEmail(s.getEmail());
 					student.setTelefon(s.getTelefon());
-					student.setGodinaStudija(s.getGodinaStudija());
-					student.setStatus(s.getStatus());
 					student.setDatumRodjenja(s.getDatumRodjenja());
+					student.setGodinaStudija(s.getGodinaStudija());
 					iterator.set(student);
 					System.out.println(iterator.toString());
 				}

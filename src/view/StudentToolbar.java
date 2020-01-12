@@ -124,6 +124,15 @@ public class StudentToolbar extends JToolBar {
 				
 			}});
 		
+		searchStudent.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String query = textField.getText();
+				
+				StudentiTable.getInstance().search(query);
+			}
+		});
 		}
 	
 
