@@ -58,8 +58,10 @@ public class Predmet implements Serializable{
 	}
 
 	public ArrayList<Student> getStudenti() {
-	return studenti;
+		return studenti;
 	}
+	
+
 	
 
 	public void setSifra(String sifra) {

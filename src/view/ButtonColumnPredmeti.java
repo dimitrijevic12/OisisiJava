@@ -46,6 +46,7 @@ public class ButtonColumnPredmeti extends AbstractCellEditor
 				{	
 					PrikazStudenata ps=new PrikazStudenata(predmet);
 					ps.setVisible(true);
+					fireEditingStopped();
 				}
 				else {
 					JOptionPane.showMessageDialog(new JFrame(), "Za izabrani predmet nema studenata","", JOptionPane.INFORMATION_MESSAGE);

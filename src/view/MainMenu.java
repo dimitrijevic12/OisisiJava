@@ -59,7 +59,7 @@ import model.Student;
 			JMenuItem miHelp=new JMenuItem("Help",new ImageIcon("images/Help16.png"));
 			miHelp.setMnemonic(KeyEvent.VK_H);
 			miHelp.setAccelerator(KeyStroke.getKeyStroke("control H"));
-			JMenuItem miAbout=new JMenuItem("Abput",new ImageIcon("images/About16.png"));
+			JMenuItem miAbout=new JMenuItem("About",new ImageIcon("images/About16.png"));
 			miAbout.setMnemonic(KeyEvent.VK_A);
 			miAbout.setAccelerator(KeyStroke.getKeyStroke("control A"));
 			
@@ -69,6 +69,27 @@ import model.Student;
 			add(file);
 			add(edit);
 			add(help);
+			
+			
+			miAbout.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+						About a=new About();
+						a.setVisible(true);
+				}});
+			
+			
+			miHelp.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+						Help h=new Help();
+						h.setVisible(true);
+				}});
+			
 			
 			miNew.addActionListener(new ActionListener() {
 
