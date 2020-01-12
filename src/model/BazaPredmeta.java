@@ -100,7 +100,7 @@ public class BazaPredmeta implements Serializable{
 
 	public void dodajPredmet(String sifra, String naziv, Semestar semestar, GodinaStudija godina, Profesor profesor,
 			ArrayList<Student> studenti) {
-		this.predmeti.add(new Predmet(sifra, naziv, semestar,  godina,  profesor, studenti));
+		this.predmeti.add(new Predmet(sifra, naziv, semestar,  godina,  null, studenti));
 	}
 
 	public void izbrisiPredmet(Predmet p) {

@@ -214,7 +214,7 @@ import model.Student;
 					}
 					else
 					{
-						if(ProfesoriTable.getInstance().getSelectionModel().getSelectedItemsCount()==1) {
+						if(PredmetiTable.getInstance().getSelectionModel().getSelectedItemsCount()==1) {
 							int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
 							System.out.println("Selected row: " + rowIndex);
 							Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);

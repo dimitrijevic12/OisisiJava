@@ -192,11 +192,15 @@ public class IzmenaPredmetaDijalog extends JDialog{
 			
 			for(Predmet predmet : BazaPredmeta.getInstance().getPredmeti()) {
 				if(predmet.getSifra().equals(sifraTextField.getText())) {
-					JOptionPane.showMessageDialog(null, "Već postoji predmet sa šifrom: " + sifraTextField.getText(), "Greška!", JOptionPane.ERROR_MESSAGE);
-					return;
+					if(predmet == p) {
+						PredmetiController.getInstance().izmenaPredmetaIzTabele(p, sifraTextField.getText(), nazivTextField.getText(), semestar1, godina1);
+					}else {
+						JOptionPane.showMessageDialog(null, "Već postoji predmet sa šifrom: " + sifraTextField.getText(), "Greška!", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
 				}
 			}
-			PredmetiController.getInstance().izmenaPredmetaIzTabele(p, sifraTextField.getText(), nazivTextField.getText(), semestar1, godina1);
+			
 			
 			dispose();
 			}
