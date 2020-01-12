@@ -9,18 +9,11 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.ListIterator;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import controllers.StudentiController;
 
-import controllers.PredmetiController;
-import controllers.ProfesoriController;
-
-public class BazaStudent  {
+public class BazaStudent implements Serializable {
 	/**
 	 * 
 	 */
@@ -74,7 +67,7 @@ public class BazaStudent  {
 		return kolone.size();
 	}
 	public void setStudenti(ArrayList<Student> Studenti) {
-		this.studenti = studenti;
+		this.studenti = Studenti;
 	}
 	
 	
@@ -132,6 +125,40 @@ public class BazaStudent  {
 					iterator.remove();
 					}
 				}
+	}
+	
+	public void serijalizacijaStudenata() {
+		try {
+			FileOutputStream fStudenata = new FileOutputStream("studenti.ser");
+			ObjectOutputStream studentOut = new ObjectOutputStream(fStudenata);
+			studentOut.writeObject(BazaStudent.getInstance().getStudenti());
+			
+			studentOut.close();
+			fStudenata.close();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deserijalizacijaStudenata() {
+		try {
+			System.out.println("\n\n");
+			FileInputStream fStudenata = new FileInputStream("studenti.ser");
+			ObjectInputStream studentIn = new ObjectInputStream(fStudenata);
+			@SuppressWarnings("unchecked")
+			ArrayList<Student> studenti = (ArrayList<Student>) studentIn.readObject();
+			BazaStudent.getInstance().setStudenti(studenti);
+		    StudentiController.getInstance().promenaPosleDeserijalizacije();
+			
+			studentIn.close();
+			fStudenata.close();
+		}catch (IOException e) {
+			
+			 e.printStackTrace();
+		}catch (ClassNotFoundException cnf) {
+		  	 
+			cnf.printStackTrace();
+		}
 	}
 	
 	

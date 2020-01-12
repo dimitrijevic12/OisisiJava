@@ -28,8 +28,10 @@ package view;
 	import javax.swing.SwingConstants;
 
 import controllers.StudentiController;
+import model.BazaProfesora;
 import model.BazaStudent;
 import model.GodinaStudija;
+import model.Profesor;
 import model.Status;
 import model.Student;
 
@@ -40,11 +42,11 @@ import model.Student;
 		 */
 		private static final long serialVersionUID = 7597576125968335383L;
 		
-		private JLabel lIme,lPrezime,lDatum,lAdresa,lTelefon,lIndex,lGodina;
-		private JTextField tIme,tPrezime,tDatum,tAdresa,tTelefon,tIndex;
+		private JLabel lIme,lPrezime,lDatum,lAdresa,lTelefon,lIndex,lGodina,lProsek;
+		private JTextField tIme,tPrezime,tDatum,tAdresa,tTelefon,tIndex,tProsek;
 		private JComboBox cbGodina;
 		private JRadioButton rbBudzet,rbFinansiranje;
-		private JPanel p1,p2,p3,p4,p5,p6,p7,p8,p9,p10;
+		private JPanel p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p12;
 		private SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
 		
 		
@@ -291,6 +293,44 @@ import model.Student;
 			p6.add(tIndex, gbc_textField);
 			tIndex.setColumns(10);
 			
+			//Prosek
+
+			p12 = new JPanel();
+			p12.setBackground(Color.WHITE);
+			gbc_p.fill = GridBagConstraints.BOTH;
+			gbc_p.insets = new Insets(10, 40, 10, 40);
+			gbc_p.gridx = 0;
+			gbc_p.gridy = 6;
+			getContentPane().add(p12, gbc_p);
+			GridBagLayout gbl_p12 = new GridBagLayout();
+			gbl_p12.columnWidths = new int[]{10, 0, 0};
+			gbl_p12.rowHeights = new int[]{0, 0};
+			gbl_p12.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+			gbl_p12.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+			p12.setLayout(gbl_p12);
+			
+			lProsek = new JLabel("Prosecna ocena*");
+			lProsek.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
+			gbc_lblNewLabel.insets = new Insets(0, 0, 0, 15);
+			gbc_lblNewLabel.gridx = 0;
+			gbc_lblNewLabel.gridy = 0;
+			p12.add(lProsek, gbc_lblNewLabel);
+			
+			if(i==0)
+				tProsek = new JTextField();
+			else
+				{
+					tProsek= new JTextField(s.getProsek().toString());
+				}
+			
+			tProsek.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField.gridx = 1;
+			gbc_textField.gridy = 0;
+			p12.add(tProsek, gbc_textField);
+			tProsek.setColumns(10);
+			
 			//Godina studija
 			
 			p7 = new JPanel();
@@ -298,7 +338,7 @@ import model.Student;
 			gbc_p.fill = GridBagConstraints.BOTH;
 			gbc_p.insets = new Insets(10, 40, 10, 40);
 			gbc_p.gridx = 0;
-			gbc_p.gridy = 6;
+			gbc_p.gridy = 7;
 			getContentPane().add(p7, gbc_p);
 			GridBagLayout gbl_p7 = new GridBagLayout();
 			gbl_p7.columnWidths = new int[]{10, 0, 0};
@@ -334,7 +374,7 @@ import model.Student;
 			gbc_p.fill = GridBagConstraints.BOTH;
 			gbc_p.insets = new Insets(10, 40, 10, 40);
 			gbc_p.gridx = 0;
-			gbc_p.gridy = 7;
+			gbc_p.gridy = 8;
 			gbc_p.gridheight=2;
 			getContentPane().add(p8, gbc_p);
 			GridBagLayout gbl_p8 = new GridBagLayout();
@@ -477,9 +517,10 @@ import model.Student;
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					// TODO Auto-generated method stubs
-			       if (!(tIme.getText().trim().isEmpty()||tPrezime.getText().trim().isEmpty()||tDatum.getText().trim().isEmpty()||tAdresa.getText().trim().isEmpty()||tTelefon.getText().trim().isEmpty()||tIndex.getText().trim().isEmpty())) {
+			       if (!(tIme.getText().trim().isEmpty()||tPrezime.getText().trim().isEmpty()||tDatum.getText().trim().isEmpty()||tAdresa.getText().trim().isEmpty()||tTelefon.getText().trim().isEmpty()||tIndex.getText().trim().isEmpty()||tProsek.getText().trim().isEmpty())) {
 						SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
 						Date datumRodjenja=null;
+						Double prosek=0.0;
 						if(i==0)
 								for(Student s: BazaStudent.getInstance().getStudenti()) {
 									if(tIndex.getText().toLowerCase().equals(s.getIndeks().toLowerCase() )) {
@@ -487,6 +528,11 @@ import model.Student;
 										return;
 									}
 								}
+						try {
+						prosek=Double.parseDouble(tProsek.getText().trim()); 
+						} catch(NumberFormatException exception) {
+						    System.out.println("Prosek mora biti realan broj");
+						}
 						
 						try {
 							datumRodjenja = sdf.parse(tDatum.getText());
@@ -505,7 +551,7 @@ import model.Student;
 						else
 							status=Status.S;
 						Student student;
-						student= new Student(tIme.getText(), tPrezime.getText(),datumRodjenja, tAdresa.getText(), tTelefon.getText(), "", tIndex.getText(),Calendar.getInstance().getTime(), godinaStudija,status, 0.00);
+						student= new Student(tIme.getText(), tPrezime.getText(),datumRodjenja, tAdresa.getText(), tTelefon.getText(), "", tIndex.getText(),Calendar.getInstance().getTime(), godinaStudija,status, prosek);
 						if(i==0)
 						{
 							StudentiController.getInstance().dodajStudenta(student);
@@ -517,6 +563,9 @@ import model.Student;
 				{
 					JOptionPane.showMessageDialog(new JFrame(), "Popunite sva obavezna polja", "Obavezna polja nisu popunjena!", JOptionPane.ERROR_MESSAGE);
 				}
+			       for(Student s: BazaStudent.getInstance().getStudenti()) {
+						System.out.println(s.toString());
+					}
 				
 				dispose();
 				}

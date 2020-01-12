@@ -36,4 +36,10 @@ public class StudentiController {
 		model.fireTableDataChanged();
 	}
 	
+	public void promenaPosleDeserijalizacije() {
+		AbstractTableModelStudent model = (AbstractTableModelStudent) StudentiTable.getInstance().getModel();
+		
+		model.fireTableDataChanged();
+	}
+	
 }

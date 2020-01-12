@@ -14,6 +14,10 @@ import javax.swing.event.ChangeListener;
 import model.BazaPredmeta;
 import model.BazaProfesora;
 
+import model.BazaStudent;
+import model.Predmet;
+
+
 public class MainFrame extends JFrame {
 	
 	/**
@@ -82,6 +86,7 @@ public class MainFrame extends JFrame {
 			public void windowOpened(WindowEvent e) {
 				BazaPredmeta.getInstance().deserijalizacijaPredmeta();
 				BazaProfesora.getInstance().deserijalizacijaProfesora();
+				BazaStudent.getInstance().deserijalizacijaStudenata();
 			}
 			
 			@Override
@@ -106,6 +111,7 @@ public class MainFrame extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				BazaPredmeta.getInstance().serijalizacijaPredmeta();
 				BazaProfesora.getInstance().serijalizacijaProfesora();
+				BazaStudent.getInstance().serijalizacijaStudenata();
 			}
 			
 			@Override
