@@ -4,16 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import model.BazaProfesora;
-import model.BazaStudent;
 import model.Predmet;
 import model.Titula;
 import model.Zvanje;
 import view.AbstractTableModelPredmeti;
 import view.AbstractTableModelProfesor;
-import view.AbstractTableModelStudent;
 import view.PredmetiTable;
 import view.ProfesoriTable;
-import view.StudentiTable;
 
 public class ProfesoriController {
 	

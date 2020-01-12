@@ -13,11 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
-import controllers.PredmetiController;
 import controllers.ProfesoriController;
-import model.BazaPredmeta;
 import model.BazaProfesora;
-import model.Predmet;
 import model.Profesor;
 
 public class ProfesorToolbar extends JToolBar {

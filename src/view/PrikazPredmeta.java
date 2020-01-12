@@ -41,11 +41,7 @@ public class PrikazPredmeta extends JDialog {
 		
 		lista.setModel(listData);
 		lista.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		/*
-		 * JTextArea textArea = new JTextArea(stringBuilder.toString());
-		 * textArea.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		 * textArea.setEditable(false);
-		 */
+	
 		scroll.setViewportView(lista);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);

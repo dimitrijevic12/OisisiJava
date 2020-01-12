@@ -29,7 +29,6 @@ public class PredmetiTable extends JTable {
 	private PredmetiTable() {
 		this.setModel(new AbstractTableModelPredmeti());
 		new ButtonColumnPredmeti(this, 5);
-//		this.setAutoCreateRowSorter(true);
 		sorter = new TableRowSorter<>((AbstractTableModelPredmeti) getModel());
 		this.setRowSorter(sorter);
 	}

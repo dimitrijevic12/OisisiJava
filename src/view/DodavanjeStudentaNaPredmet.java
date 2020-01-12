@@ -21,10 +21,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import controllers.PredmetiController;
-import controllers.StudentiController;
-import model.BazaStudent;
-import model.Predmet;
-import model.Student;
 
 public class DodavanjeStudentaNaPredmet extends JDialog{
 

@@ -27,10 +27,8 @@ import javax.swing.SwingConstants;
 
 import controllers.ProfesoriController;
 import model.BazaProfesora;
-import model.BazaStudent;
 import model.Predmet;
 import model.Profesor;
-import model.Student;
 import model.Titula;
 import model.Zvanje;
 
@@ -47,8 +45,8 @@ public class DodavanjeProfesoraDialog extends JDialog {
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
-	private JComboBox comboBox;
-	private JComboBox comboBox_1;
+	private JComboBox<Titula> comboBox;
+	private JComboBox<Zvanje> comboBox_1;
 	private JPanel panel_1;
 	private JPanel panel_2;
 	private JPanel panel_3;

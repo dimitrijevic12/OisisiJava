@@ -15,12 +15,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controllers.PredmetiController;
-import model.BazaPredmeta;
 import model.GodinaStudija;
 import model.Predmet;
 import model.Semestar;

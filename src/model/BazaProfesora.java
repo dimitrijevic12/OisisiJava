@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import controllers.ProfesoriController;
 
@@ -53,8 +52,6 @@ public class BazaProfesora implements Serializable {
 		this.profesori = new ArrayList<Profesor>();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 		try {
-			ArrayList<Predmet> predmeti1 = new ArrayList<Predmet>();
-//			predmeti1.add(new pred)
 			profesori.add(new Profesor("Aleksa", "Petković", sdf.parse("15.01.1965"), "Temerinska 15, Novi Sad", "021/334-990", "aleksa.petkovic@mailinator.com", "Dositeja Obradovića 6, Novi Sad, MI 105", "007198721", Titula.PROF, Zvanje.REDOVNI, new ArrayList<Predmet>()));
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -160,6 +157,7 @@ public class BazaProfesora implements Serializable {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void deserijalizacijaProfesora() {
 		try {
 			System.out.println("\n\n");

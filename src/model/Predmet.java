@@ -15,6 +15,16 @@ public class Predmet implements Serializable{
 	private Profesor profesor;
 	private ArrayList<Student> studenti;
 	
+	public Predmet() {
+		super();
+		this.sifra = "";
+		this.naziv = "";
+		this.semestar = Semestar.PRVI;
+		this.godina = GodinaStudija.PRVA;
+		this.profesor = null;
+		this.studenti = new ArrayList<Student>();
+	}
+	
 	public Predmet(String sifra, String naziv, Semestar semestar, GodinaStudija godina, Profesor profesor,ArrayList<Student> studenti)
 	{
 			

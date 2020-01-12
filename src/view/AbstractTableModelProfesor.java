@@ -14,7 +14,6 @@ public class AbstractTableModelProfesor extends AbstractTableModel{
 	
 	@Override
 	public int getColumnCount() {
-//		return columnNames.length;
 		return BazaProfesora.getInstance().getColumnCount() + 1;
 	}
 
@@ -25,7 +24,6 @@ public class AbstractTableModelProfesor extends AbstractTableModel{
 	
 	@Override
 	public String getColumnName(int col) {
-//		return columnNames[col];
 		if(col >= BazaProfesora.getInstance().getColumnCount()) {
 			return kolonaPredmeti;
 		}else return BazaProfesora.getInstance().getColumnName(col);	

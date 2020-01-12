@@ -7,7 +7,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JOptionPane;
 
@@ -32,7 +31,6 @@ public class BazaPredmeta implements Serializable{
 	
 	private ArrayList<String> kolone;
 	private ArrayList<Predmet> predmeti;
-	private ArrayList<Student> studenti;
 	
 	private BazaPredmeta() {
 		initPredmete();
@@ -243,6 +241,7 @@ public class BazaPredmeta implements Serializable{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void deserijalizacijaPredmeta() {
 		try {
 			System.out.println("\n\n");

@@ -19,12 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import controllers.PredmetiController;
-import model.BazaPredmeta;
-import model.Predmet;
 
 public class DodavanjeProfesoraNaPredmet extends JDialog {
 	/**
@@ -43,7 +39,6 @@ public class DodavanjeProfesoraNaPredmet extends JDialog {
 		BorderLayout bL = new BorderLayout();
 		this.setLayout(bL);
 		
-//		BorderLayout bL1 = new BorderLayout();
 		JPanel panel = new JPanel();
 		panel.setLayout(gL);
 		panel.setBackground(Color.WHITE);
@@ -105,7 +100,6 @@ public class DodavanjeProfesoraNaPredmet extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int rowIndex = PredmetiTable.getInstance().convertRowIndexToModel(PredmetiTable.getInstance().getSelectedRow());
-//				Predmet predmet = BazaPredmeta.getInstance().getRow(rowIndex);
 				
 				PredmetiController.getInstance().dodavanjeProfesoraNaPredmet(rowIndex, brLicneTextField.getText());
 				dispose();
