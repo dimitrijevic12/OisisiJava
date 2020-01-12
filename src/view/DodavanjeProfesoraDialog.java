@@ -526,7 +526,8 @@ public class DodavanjeProfesoraDialog extends JDialog {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(textField.getText().trim().isEmpty()||textField_1.getText().trim().isEmpty()||textField_2.getText().trim().isEmpty()||textField_3.getText().trim().isEmpty()||textField_4.getText().trim().isEmpty()||textField_5.getText().trim().isEmpty()||textField_6.getText().trim().isEmpty()||textField_7.getText().trim().isEmpty()) {
+				System.out.println("Kliknuta potvrda");
+				if(!textField.getText().trim().isEmpty()||!textField_1.getText().trim().isEmpty()||!textField_2.getText().trim().isEmpty()||!textField_3.getText().trim().isEmpty()||!textField_4.getText().trim().isEmpty()||!textField_5.getText().trim().isEmpty()||!textField_6.getText().trim().isEmpty()||!textField_7.getText().trim().isEmpty()) {
 						if(i==0)
 							for(Profesor p: BazaProfesora.getInstance().getProfesori()) {
 								if(textField_7.getText().trim().equals(p.getBrLicne() )) {
