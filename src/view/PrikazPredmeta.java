@@ -23,7 +23,7 @@ public class PrikazPredmeta extends JDialog {
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension d = new Dimension();
 		d = kit.getScreenSize();
-		d.setSize(d.width/7, d.height/5);
+		d.setSize(d.width/5, d.height/5);
 		setSize(d); 
 		
 		JScrollPane scroll = new JScrollPane();
